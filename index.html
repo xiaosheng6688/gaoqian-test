@@ -98,96 +98,81 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
     <div class="test-card" onclick="startTest('love')">
       <div class="test-emoji">💕</div>
       <div class="test-title">恋爱人格鉴定</div>
-      <div class="test-desc">测出你的隐藏恋爱DNA！你是恋爱脑还是冰山美人？</div>
+      <div class="test-desc">测出你的隐藏恋爱DNA！你是舔狗还是海王？</div>
       <span class="test-tag">💘 12种人格 · ¥5.9解锁</span>
     </div>
   </div>
-  <div class="footer">🔥 已有 86,432 人完成测试 · 仅供娱乐</div>
+  <p class="footer">已有 12,847 人参与测试</p>
 </div>
 
 <!-- ========== 测试页面 ========== -->
 <div class="page" id="page-test">
   <div class="nav" id="testNav"></div>
-  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-  <div class="q-num" id="qNum"></div>
-  <div class="q-text" id="qText"></div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="q-num" id="qNum">第 1 / 12 题</div>
+  <div class="q-text" id="qText">题目加载中...</div>
   <div class="options" id="options"></div>
 </div>
 
 <!-- ========== 计算页面 ========== -->
 <div class="page" id="page-calc">
   <div class="calc-icon" id="calcIcon">🧬</div>
-  <div class="calc-text" id="calcText">正在分析...</div>
+  <div class="calc-text" id="calcText">正在分析你的DNA...</div>
   <div class="calc-percent" id="calcPercent">0%</div>
 </div>
 
 <!-- ========== 结果页面 ========== -->
 <div class="page" id="page-result">
   <div class="result-card">
-    <div class="result-emoji" id="resultEmoji"></div>
-    <div class="result-type" id="resultType"></div>
-    <div class="result-code" id="resultCode"></div>
-    <div class="result-desc" id="resultDesc"></div>
+    <div class="result-emoji" id="resultEmoji">🎯</div>
+    <div class="result-type" id="resultType">结果类型</div>
+    <div class="result-code" id="resultCode">CODE-001</div>
+    <div class="result-desc" id="resultDesc">描述加载中...</div>
     <div class="result-tags" id="resultTags"></div>
     <div class="result-bar" id="resultBars"></div>
   </div>
   <div class="btn-group">
-    <button class="btn-unlock" onclick="showPaywall()">🔐 解锁完整分析报告</button>
-    <button class="btn-share" onclick="shareResult()">📤 分享给好友测测</button>
-    <button class="btn-retry" onclick="backHome()">🏠 返回首页</button>
+    <button class="btn-unlock" onclick="showPaywall()">🔓 解锁完整报告（¥5.9）</button>
+    <button class="btn-share" onclick="shareResult()">📤 分享给好友</button>
+    <button class="btn-retry" onclick="goHome()">↩ 返回首页</button>
   </div>
 </div>
 
 <!-- ========== 支付弹窗 ========== -->
 <div class="modal-overlay" id="modalPaywall">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <div class="modal-title">🔒 解锁完整分析报告</div>
-    <div class="modal-sub" id="modalSub">你的隐藏人格远不止表面这些</div>
-    <div class="modal-price">¥ 5.9</div>
-    <div class="modal-report-preview">
-      <h4>报告包含：</h4>
-      <ul>
-        <li>人格深度解析（1500字）</li>
-        <li>你的优势与致命盲区</li>
-        <li>2026年最适合你的方向</li>
-        <li>避坑指南</li>
-        <li>幸运色/数字/星座</li>
-      </ul>
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-title">🔒 完整报告锁定中</div>
+    <div class="modal-sub">支付 ¥5.9 解锁你的专属人格报告<br>或联系微信 <span style="color:var(--gold)">z6ys8866</span></div>
+    <div class="modal-price">¥5.9</div>
+    <div style="display:flex;gap:12px;justify-content:center;margin-bottom:10px;">
+      <div class="modal-qr" id="wechatQr"><div style="color:var(--text2);font-size:12px;">微信</div></div>
+      <div class="modal-qr" id="alipayQr"><div style="color:var(--text2);font-size:12px;">支付宝</div></div>
     </div>
-    <div class="modal-qr" id="wechatQr"></div>
-    <div class="modal-wechat">微信扫码支付</div>
-    <div class="modal-qr" id="alipayQr" style="margin-top:8px"></div>
-    <div style="font-size:12px;color:var(--text2);margin-top:8px">支付宝扫码支付</div>
+    <div class="modal-wechat">微信号：z6ys8866</div>
     <div class="modal-steps">
       <span>①</span> 扫码支付 ¥5.9<br>
-      <span>②</span> 添加微信 <span style="color:var(--accent)">z6ys8866</span><br>
-      <span>③</span> 发送支付截图获取<b>解锁密钥</b><br>
-      <span>④</span> 输入密钥，自动开通VIP ✅
+      <span>②</span> 截图支付凭证<br>
+      <span>③</span> 加微信 z6ys8866 发送截图<br>
+      <span>④</span> 获得解锁密钥
     </div>
-    <div style="margin-top:16px;border-top:1px solid rgba(255,255,255,0.1);padding-top:16px;">
-      <div style="font-size:13px;color:var(--gold);margin-bottom:8px;font-weight:600;">🔑 输入解锁密钥</div>
-      <input type="text" id="vipKeyInput" placeholder="请输入密钥（如：SBTI2026VIP）" style="width:100%;padding:10px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(245,166,35,0.3);border-radius:10px;color:#fff;font-size:14px;outline:none;text-align:center;">
+    <div class="modal-report-preview">
+      <h4>🔮 完整报告包含</h4>
+      <li>人格深度解析</li>
+      <li>致命盲区预警</li>
+      <li>2026年最适合你的方向</li>
+      <li>幸运指南（色/数字/星座）</li>
+    </div>
+    <div style="margin-top:14px;border-top:1px solid rgba(255,255,255,0.1);padding-top:14px;">
+      <p style="font-size:12px;color:var(--text2);margin-bottom:8px;">已有密钥？输入解锁：</p>
+      <input type="text" id="vipKeyInput" placeholder="请输入密钥" style="width:100%;padding:10px 14px;background:rgba(255,255,255,0.08);border:1px solid rgba(245,166,35,0.3);border-radius:10px;color:#fff;font-size:14px;outline:none;text-align:center;">
       <button onclick="verifyVipKey()" style="width:100%;margin-top:10px;padding:10px;background:linear-gradient(135deg,var(--gold),#ff8c00);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;">✨ 立即解锁VIP</button>
-      <div id="vipError" style="color:var(--accent);font-size:12px;margin-top:8px;display:none;">❌ 密钥错误，请确认后重试</div>
+      <div id="vipError" style="color:var(--accent);font-size:12px;margin-top:8px;display:none;">❌ 密钥错误</div>
     </div>
   </div>
 </div>
 
 <script>
-
-// ========== 防爆款：备用CDN ==========
-const BACKUP_CDN = [
-  'https://cdn.jsdelivr.net/gh/xiaosheng6688/gaoqian-test@master',
-  'https://fastly.jsdelivr.net/gh/xiaosheng6688/gaoqian-test@master',
-  'https://gcore.jsdelivr.net/gh/xiaosheng6688/gaoqian-test@master'
-];
-
-function getWorkingCdn() {
-  // 简单返回第一个，实际可以添加检测逻辑
-  return BACKUP_CDN[0];
-}
-
 // ========== 配置 ==========
 const CONFIG = {
   wechatId: 'z6ys8866',
@@ -195,8 +180,8 @@ const CONFIG = {
   alipayQrUrl: 'https://cdn.jsdelivr.net/gh/xiaosheng6688/gaoqian-test@master/ali_pay.jpg',
   price: 5.9,
   vipKey: 'SBTI2026VIP',
-  devMode: true,  // 开发者模式：永久VIP，无需付费
-  devKey: 'DEV2026BOSS'  // 开发者密钥，输入后直接解锁所有测试
+  devMode: true,
+  devKey: 'DEV2026BOSS'
 };
 
 // ========== 测试数据 ==========
@@ -297,206 +282,202 @@ const TEST_DATA = {
     questions: [
       { text: '周一早上醒来，你的第一反应是？', options: [
         { text: '又要上班了，好烦', scores: { burnout: 3, slacker: 2 } },
-        { text: '新的一周，冲！', scores: { gogetter: 3, leader: 2 } },
-        { text: '先刷会手机再说', scores: { slacker: 3, burnout: 2 } },
-        { text: '规划一下这周的重点任务', scores: { planner: 3, gogetter: 2 } },
+        { text: '新的一周，冲！', scores: { grinder: 3, climber: 2 } },
+        { text: '再睡5分钟...', scores: { slacker: 3, burnout: 2 } },
+        { text: '今天有什么会要开？', scores: { boss: 3, politician: 2 } },
       ]},
-      { text: '老板突然加了一个紧急任务，你会？', options: [
-        { text: '立刻放下手头的事先做', scores: { yesman: 3, gogetter: 2 } },
-        { text: '先评估优先级，再安排', scores: { planner: 3, strategist: 2 } },
-        { text: '表面上答应，实际拖到最后', scores: { slacker: 3, burnout: 2 } },
-        { text: '直接说手上还有更重要的', scores: { leader: 3, strategist: 2 } },
+      { text: '领导下班前布置紧急任务，你会？', options: [
+        { text: '默默加班做完', scores: { grinder: 3, burnout: 2 } },
+        { text: '先问清楚优先级', scores: { boss: 3, specialist: 2 } },
+        { text: '拖到明天再说', scores: { slacker: 3, zen: 2 } },
+        { text: '拉上同事一起做', scores: { politician: 3, social: 2 } },
       ]},
-      { text: '团队开会时，你通常？', options: [
-        { text: '积极发言，主导讨论', scores: { leader: 3, gogetter: 2 } },
-        { text: '认真听，偶尔补充', scores: { teamplayer: 3, planner: 2 } },
-        { text: '默默玩手机，等散会', scores: { slacker: 3, burnout: 2 } },
-        { text: '脑子里想的是别的事', scores: { dreamer: 3, creative: 2 } },
+      { text: '同事抢了你的功劳，你会？', options: [
+        { text: '忍气吞声，下次注意', scores: { burnout: 3, slacker: 2 } },
+        { text: '直接找领导说明', scores: { boss: 3, climber: 2 } },
+        { text: '下次提前留证据', scores: { politician: 3, fox: 2 } },
+        { text: '无所谓，不在乎', scores: { zen: 3, specialist: 2 } },
       ]},
-      { text: '同事找你帮忙做他的工作，你会？', options: [
-        { text: '帮！同事之间要互相支持', scores: { teamplayer: 3, yesman: 2 } },
-        { text: '看情况，不忙就帮', scores: { diplomat: 3, teamplayer: 2 } },
-        { text: '委婉拒绝，自己也很忙', scores: { strategist: 3, leader: 2 } },
-        { text: '让他找老板协调', scores: { leader: 3, strategist: 2 } },
+      { text: '关于升职加薪，你的策略是？', options: [
+        { text: '拼命加班，让领导看到', scores: { grinder: 3, burnout: 2 } },
+        { text: '直接找领导谈', scores: { climber: 3, boss: 2 } },
+        { text: '跳槽最实在', scores: { fox: 3, creative: 2 } },
+        { text: '随缘，该来会来', scores: { zen: 3, slacker: 2 } },
       ]},
-      { text: '你理想中的工作状态是？', options: [
-        { text: '朝九晚五，准时下班', scores: { slacker: 3, burnout: 2 } },
-        { text: '有挑战，能不断成长', scores: { gogetter: 3, leader: 2 } },
-        { text: '自由安排，不受约束', scores: { creative: 3, dreamer: 2 } },
-        { text: '稳定，不要有太大变化', scores: { burnout: 3, teamplayer: 2 } },
+      { text: '团队项目出问题，你会？', options: [
+        { text: '主动承担责任', scores: { boss: 3, grinder: 2 } },
+        { text: '分析原因，找解决方案', scores: { specialist: 3, analyst: 2 } },
+        { text: '甩锅给其他人', scores: { politician: 3, fox: 2 } },
+        { text: '等领导决定', scores: { slacker: 3, burnout: 2 } },
       ]},
-      { text: '遇到不会的工作任务，你会？', options: [
-        { text: '自己查资料研究', scores: { gogetter: 3, planner: 2 } },
-        { text: '直接问有经验的同事', scores: { teamplayer: 3, yesman: 2 } },
-        { text: '先拖着，看能不能混过去', scores: { slacker: 3, burnout: 2 } },
-        { text: '想办法推给别人做', scores: { strategist: 3, diplomat: 2 } },
+      { text: '你的理想工作状态是？', options: [
+        { text: '朝九晚五，准点下班', scores: { zen: 3, slacker: 2 } },
+        { text: '有挑战，能成长', scores: { climber: 3, specialist: 2 } },
+        { text: '当领导，管人管事', scores: { boss: 3, politician: 2 } },
+        { text: '自由职业，不受约束', scores: { creative: 3, fox: 2 } },
       ]},
-      { text: '年底绩效评估，你期望？', options: [
-        { text: '拿最高奖金，升职加薪', scores: { gogetter: 3, leader: 2 } },
-        { text: '达到平均水平就行', scores: { teamplayer: 3, burnout: 2 } },
-        { text: '只要不垫底就好', scores: { slacker: 3, burnout: 2 } },
-        { text: '奖金不重要，学到东西就行', scores: { creative: 3, dreamer: 2 } },
+      { text: '公司团建占用周末，你会？', options: [
+        { text: '积极参加，搞好关系', scores: { politician: 3, social: 2 } },
+        { text: '找借口不去', scores: { slacker: 3, specialist: 2 } },
+        { text: '去但全程摸鱼', scores: { zen: 3, burnout: 2 } },
+        { text: '组织活动，展现领导力', scores: { boss: 3, climber: 2 } },
       ]},
-      { text: '公司要裁员，你觉得最可能裁谁？', options: [
-        { text: '业绩最差的', scores: { gogetter: 3, strategist: 2 } },
-        { text: '和领导关系不好的', scores: { diplomat: 3, strategist: 2 } },
-        { text: '最老实的那个', scores: { yesman: 3, teamplayer: 2 } },
-        { text: '运气不好的', scores: { slacker: 3, burnout: 2 } },
+      { text: '面对职场PUA，你会？', options: [
+        { text: '默默忍受', scores: { burnout: 3, slacker: 2 } },
+        { text: '录音留证据，准备仲裁', scores: { fox: 3, analyst: 2 } },
+        { text: '当场怼回去', scores: { boss: 3, climber: 2 } },
+        { text: '辞职，不伺候了', scores: { creative: 3, zen: 2 } },
       ]},
-      { text: '下班后，你通常？', options: [
-        { text: '继续加班，卷死同事', scores: { gogetter: 3, leader: 2 } },
-        { text: '学习充电，提升自己', scores: { planner: 3, gogetter: 2 } },
-        { text: '立刻回家躺平', scores: { burnout: 3, slacker: 2 } },
-        { text: '社交应酬，拓展人脉', scores: { diplomat: 3, leader: 2 } },
+      { text: '你的工位风格是？', options: [
+        { text: '极简，随时能走人', scores: { fox: 3, slacker: 2 } },
+        { text: '满满当当，像家一样', scores: { grinder: 3, burnout: 2 } },
+        { text: '只有电脑和杯子', scores: { specialist: 3, zen: 2 } },
+        { text: '摆满领导合影和奖状', scores: { politician: 3, climber: 2 } },
       ]},
-      { text: '对于拍马屁的同事，你？', options: [
-        { text: '鄙视，但表面客气', scores: { strategist: 3, leader: 2 } },
-        { text: '理解，职场生存之道', scores: { diplomat: 3, teamplayer: 2 } },
-        { text: '不屑，做好自己的事', scores: { gogetter: 3, planner: 2 } },
-        { text: '学他！谁不想升职加薪', scores: { yesman: 3, diplomat: 2 } },
+      { text: '开会时你通常是？', options: [
+        { text: '认真记笔记', scores: { grinder: 3, specialist: 2 } },
+        { text: '偶尔发言刷存在感', scores: { politician: 3, climber: 2 } },
+        { text: '全程走神想别的', scores: { slacker: 3, creative: 2 } },
+        { text: '打断别人，表达观点', scores: { boss: 3, analyst: 2 } },
       ]},
-      { text: '如果创业，你最可能？', options: [
-        { text: '技术创业，做产品', scores: { creative: 3, planner: 2 } },
-        { text: '资源整合，做平台', scores: { leader: 3, diplomat: 2 } },
-        { text: '不会创业，太冒险', scores: { burnout: 3, teamplayer: 2 } },
-        { text: '先副业试水，再全职', scores: { gogetter: 3, strategist: 2 } },
+      { text: '对于工作群消息，你？', options: [
+        { text: '秒回，生怕错过', scores: { grinder: 3, burnout: 2 } },
+        { text: '看内容，重要才回', scores: { boss: 3, specialist: 2 } },
+        { text: '已读不回', scores: { slacker: 3, zen: 2 } },
+        { text: '只回领导的消息', scores: { politician: 3, climber: 2 } },
       ]},
-      { text: '你觉得自己最大的职场优势是？', options: [
-        { text: '执行力强，说到做到', scores: { gogetter: 3, leader: 2 } },
-        { text: '人脉广，关系好', scores: { diplomat: 3, teamplayer: 2 } },
-        { text: '创意多，想法新颖', scores: { creative: 3, dreamer: 2 } },
-        { text: '靠谱，从不掉链子', scores: { teamplayer: 3, planner: 2 } },
+      { text: '如果中了500万，你会？', options: [
+        { text: '辞职，享受人生', scores: { zen: 3, slacker: 2 } },
+        { text: '继续工作，但更有底气', scores: { specialist: 3, grinder: 2 } },
+        { text: '创业，当老板', scores: { boss: 3, creative: 2 } },
+        { text: '投资理财，钱生钱', scores: { fox: 3, analyst: 2 } },
       ]},
     ],
     types: {
-      gogetter: { emoji: '🚀', name: '野心家', code: 'GO-001', desc: '你天生就是来征服职场的！目标明确、执行力爆表，升职加薪是你的唯一KPI。', tags: ['目标明确', '执行力强', '升职加薪'], bars: { '执行力': 95, '领导力': 70, '创意力': 50, '人际力': 45 }},
-      teamplayer: { emoji: '🤝', name: '老黄牛', code: 'TEAM-002', desc: '你是团队最可靠的基石。任劳任怨、从不抱怨，大家都爱和你合作。', tags: ['靠谱担当', '任劳任怨', '团队粘合剂'], bars: { '执行力': 75, '领导力': 30, '创意力': 40, '人际力': 80 }},
-      leader: { emoji: '👑', name: '领袖型', code: 'BOSS-003', desc: '你天生自带领导光环！团队总会自然围绕你。你有魄力、有担当。', tags: ['天生领袖', '魄力担当', '团队核心'], bars: { '执行力': 80, '领导力': 95, '创意力': 55, '人际力': 75 }},
-      slacker: { emoji: '🦥', name: '摸鱼王', code: 'FISH-004', desc: '你的职场哲学是"能混则混"。深谙职场生存之道——活要干，但不能干太多。', tags: ['摸鱼大师', '职场老油条', '生存智慧'], bars: { '执行力': 20, '领导力': 25, '创意力': 60, '人际力': 50 }},
-      planner: { emoji: '📋', name: '规划师', code: 'PLAN-005', desc: '没有计划的一天是不完整的！你的日程表精确到分钟。', tags: ['计划狂魔', '效率达人', '井井有条'], bars: { '执行力': 85, '领导力': 50, '创意力': 45, '人际力': 40 }},
-      creative: { emoji: '💡', name: '点子王', code: 'IDEA-006', desc: '你的大脑是创意永动机！总有新奇的想法冒出来。', tags: ['创意无限', '脑洞大开', '灵感喷泉'], bars: { '执行力': 50, '领导力': 45, '创意力': 95, '人际力': 55 }},
-      burnout: { emoji: '😩', name: '倦怠者', code: 'TIRED-007', desc: '你正在经历或曾经经历过职场倦怠。不是不优秀，是累了。', tags: ['身心俱疲', '需要充电', '重新出发'], bars: { '执行力': 30, '领导力': 20, '创意力': 35, '人际力': 40 }},
-      yesman: { emoji: '🙇', name: '老好人', code: 'YES-008', desc: '你很难对别人说"不"。同事找你帮忙从不拒绝。', tags: ['不懂拒绝', '讨好型', '委屈自己'], bars: { '执行力': 60, '领导力': 15, '创意力': 30, '人际力': 70 }},
-      strategist: { emoji: '🎲', name: '谋略家', code: 'CHESS-009', desc: '你走一步看三步！职场对你来说就是一盘棋。', tags: ['深谋远虑', '城府深', '职场棋手'], bars: { '执行力': 70, '领导力': 75, '创意力': 65, '人际力': 60 }},
-      diplomat: { emoji: '🎭', name: '变色龙', code: 'ADAPT-010', desc: '你是最会"见人说人话、见鬼说鬼话"的职场高手。', tags: ['左右逢源', '情商爆表', '适应力强'], bars: { '执行力': 55, '领导力': 60, '创意力': 50, '人际力': 95 }},
-      dreamer: { emoji: '🌈', name: '理想家', code: 'DREAM-011', desc: '你工作不只是为了钱，是为了实现理想。', tags: ['理想主义', '追求意义', '不甘平庸'], bars: { '执行力': 45, '领导力': 40, '创意力': 75, '人际力': 50 }},
-      diplomat2: { emoji: '🎯', name: '卷王', code: 'GRIND-012', desc: '不卷到第一不罢休！你的执行力和自律令人叹服。', tags: ['目标导向', '自律达人', '不卷不行'], bars: { '执行力': 90, '领导力': 65, '创意力': 40, '人际力': 45 }},
+      grinder: { emoji: '🌀', name: '卷王', code: 'GRIND-001', desc: '你不卷到第一不罢休！加班是你的勋章，996是你的福报。', tags: ['加班狂魔', '不卷不舒服', '工作狂'], bars: { '执行力': 95, '领导力': 30, '创意力': 40, '人际力': 50 }},
+      slacker: { emoji: '🐟', name: '摸鱼大师', code: 'FISH-002', desc: '上班就是摸鱼，工资是精神损失费。你的工位就是你的鱼塘。', tags: ['摸鱼达人', '带薪如厕', '准点下班'], bars: { '执行力': 10, '领导力': 15, '创意力': 45, '人际力': 35 }},
+      burnout: { emoji: '😫', name: ' burnout侠', code: 'BURN-003', desc: '你已经燃尽了...每天想辞职但又不敢，在崩溃边缘反复横跳。', tags: ['燃尽了', '想辞职', '心累'], bars: { '执行力': 40, '领导力': 25, '创意力': 30, '人际力': 35 }},
+      boss: { emoji: '👔', name: '领导范', code: 'BOSS-004', desc: '天生 leadership！你说话自带权威感，团队需要你这样的人。', tags: ['天生领导', '权威感', '决策力'], bars: { '执行力': 70, '领导力': 95, '创意力': 55, '人际力': 75 }},
+      politician: { emoji: '🎭', name: '向上管理大师', code: 'UP-005', desc: '你的PPT写得比代码好，汇报比干活强。领导眼中的红人。', tags: ['PPT高手', '汇报达人', '领导红人'], bars: { '执行力': 45, '领导力': 60, '创意力': 50, '人际力': 90 }},
+      specialist: { emoji: '💻', name: '技术宅', code: 'TECH-006', desc: '代码就是你的语言。社交不如写bug，开会不如写代码。', tags: ['代码即生命', '社交恐惧', '技术大牛'], bars: { '执行力': 75, '领导力': 20, '创意力': 65, '人际力': 25 }},
+      social: { emoji: '🦋', name: '社交蝴蝶', code: 'SOCL-007', desc: '人脉广到离谱，靠关系就能搞定一切。饭局上的C位永远是你。', tags: ['人脉广', '饭局C位', '关系为王'], bars: { '执行力': 50, '领导力': 55, '创意力': 45, '人际力': 95 }},
+      climber: { emoji: '🚀', name: '野心家', code: 'CLIMB-008', desc: '你的眼里只有向上。每一步都在为升职铺路，野心写在脸上。', tags: ['野心勃勃', '目标明确', '步步为营'], bars: { '执行力': 80, '领导力': 70, '创意力': 50, '人际力': 65 }},
+      fox: { emoji: '🦊', name: '职场老狐狸', code: 'FOX-009', desc: '人精中的人精。谁也不得罪，利益最大化是你的生存法则。', tags: ['人精', '利益优先', '左右逢源'], bars: { '执行力': 60, '领导力': 50, '创意力': 55, '人际力': 80 }},
+      zen: { emoji: '🧘', name: '佛系打工人', code: 'ZEN-010', desc: '无欲无求，到点下班。裁员名单？无所谓，反正有存款。', tags: ['佛系', '到点下班', '无欲无求'], bars: { '执行力': 35, '领导力': 25, '创意力': 40, '人际力': 45 }},
+      creative: { emoji: '🎨', name: '创意鬼才', code: 'CRT-011', desc: '脑洞大到离谱，总能提出让人眼前一亮的方案。但执行力...', tags: ['脑洞大', '创意无限', '执行堪忧'], bars: { '执行力': 40, '领导力': 45, '创意力': 95, '人际力': 55 }},
+      analyst: { emoji: '📈', name: '数据狂魔', code: 'DATA-012', desc: '没有数据不说话。你的Excel比领导的命还长，图表比PPT还炫。', tags: ['数据说话', 'Excel狂魔', '理性分析'], bars: { '执行力': 65, '领导力': 40, '创意力': 50, '人际力': 35 }},
     }
   },
   love: {
     name: '恋爱', icon: '💕', calcIcon: '💘', calcText: '正在分析你的恋爱DNA...',
     questions: [
-      { text: '看到喜欢的人，你会？', options: [
-        { text: '立刻冲上去表白！', scores: { passionate: 3, brave: 2 } },
-        { text: '偷偷观察，等机会', scores: { shy: 3, cautious: 2 } },
-        { text: '假装不在意，其实内心狂跳', scores: { tsundere: 3, cool: 2 } },
-        { text: '先打听清楚对方的情况', scores: { strategist: 3, cautious: 2 } },
+      { text: ' crush不回消息，你会？', options: [
+        { text: '疯狂发消息，直到回复', scores: { anxious: 3, obsessed: 2 } },
+        { text: '等ta回复，不急', scores: { secure: 3, slowburn: 2 } },
+        { text: '无所谓，找别人聊', scores: { player: 3, independent: 2 } },
+        { text: '分析ta为什么不回', scores: { rational: 3, avoidant: 2 } },
       ]},
-      { text: '约会时，你更倾向于？', options: [
-        { text: '精心策划，每个细节都安排', scores: { planner: 3, romantic: 2 } },
-        { text: '随性而为，走到哪算哪', scores: { free: 3, passionate: 2 } },
-        { text: '让对方决定，我配合就好', scores: { accommodating: 3, shy: 2 } },
-        { text: '去网红打卡地发朋友圈', scores: { showoff: 3, romantic: 2 } },
+      { text: '约会对方迟到30分钟，你会？', options: [
+        { text: '生气，直接走人', scores: { controller: 3, anxious: 2 } },
+        { text: '理解，可能堵车', scores: { secure: 3, zen: 2 } },
+        { text: '无所谓，我也迟到', scores: { player: 3, independent: 2 } },
+        { text: '记下这笔账，以后说', scores: { rational: 3, fox: 2 } },
       ]},
-      { text: '对象不回消息，你会？', options: [
-        { text: '疯狂发消息追问', scores: { anxious: 3, passionate: 2 } },
-        { text: '等TA主动找我', scores: { proud: 3, cool: 2 } },
-        { text: '猜测各种原因，脑补剧情', scores: { overthink: 3, anxious: 2 } },
-        { text: '无所谓，我也忙', scores: { independent: 3, free: 2 } },
+      { text: '关于前任，你的态度是？', options: [
+        { text: '彻底删除，永不联系', scores: { pure: 3, controller: 2 } },
+        { text: '偶尔偷偷看朋友圈', scores: { anxious: 3, obsessed: 2 } },
+        { text: '还是朋友，偶尔联系', scores: { secure: 3, social: 2 } },
+        { text: '谁？不记得了', scores: { player: 3, independent: 2 } },
       ]},
-      { text: '吵架时，你通常？', options: [
-        { text: '必须吵赢，据理力争', scores: { fighter: 3, passionate: 2 } },
-        { text: '冷战，等对方先低头', scores: { proud: 3, cool: 2 } },
-        { text: '立刻道歉，不管谁错', scores: { accommodating: 3, anxious: 2 } },
-        { text: '讲道理，分析谁对谁错', scores: { rational: 3, strategist: 2 } },
+      { text: '恋爱中你最在意什么？', options: [
+        { text: '安全感，ta只爱我', scores: { anxious: 3, controller: 2 } },
+        { text: '自由，别管太紧', scores: { avoidant: 3, independent: 2 } },
+        { text: '浪漫，仪式感要有', scores: { romantic: 3, pure: 2 } },
+        { text: '合适，门当户对', scores: { rational: 3, secure: 2 } },
       ]},
-      { text: '你觉得最好的礼物是？', options: [
-        { text: '贵重的，代表心意', scores: { material: 3, showoff: 2 } },
-        { text: '亲手做的，独一无二', scores: { romantic: 3, planner: 2 } },
-        { text: '实用的，每天都能用到', scores: { practical: 3, rational: 2 } },
-        { text: '陪伴就是最好的礼物', scores: { accommodating: 3, romantic: 2 } },
+      { text: '如果对方说需要空间，你会？', options: [
+        { text: '是不是不爱我了？', scores: { anxious: 3, obsessed: 2 } },
+        { text: '给空间，但也担心', scores: { secure: 3, slowburn: 2 } },
+        { text: '正好，我也需要', scores: { avoidant: 3, independent: 2 } },
+        { text: '空间是什么？不存在的', scores: { controller: 3, player: 2 } },
+      ]},
+      { text: '你的理想约会方式是？', options: [
+        { text: '烛光晚餐，浪漫告白', scores: { romantic: 3, pure: 2 } },
+        { text: '在家追剧，点外卖', scores: { zen: 3, slowburn: 2 } },
+        { text: '去夜店，嗨起来', scores: { player: 3, social: 2 } },
+        { text: '一起搞钱，共同进步', scores: { rational: 3, independent: 2 } },
       ]},
       { text: '发现对象和异性聊天，你会？', options: [
-        { text: '直接质问，要求解释', scores: { jealous: 3, fighter: 2 } },
-        { text: '暗中观察，收集证据', scores: { strategist: 3, overthink: 2 } },
-        { text: '相信TA，不问', scores: { trusting: 3, independent: 2 } },
-        { text: '也找异性聊天，以示公平', scores: { proud: 3, cool: 2 } },
+        { text: '质问，要求解释', scores: { controller: 3, anxious: 2 } },
+        { text: '相信ta，不干涉', scores: { secure: 3, zen: 2 } },
+        { text: '我也找异性聊，公平', scores: { player: 3, avoidant: 2 } },
+        { text: '分析聊天内容，判断性质', scores: { rational: 3, fox: 2 } },
       ]},
-      { text: '恋爱中，你最看重？', options: [
-        { text: '安全感，被在乎的感觉', scores: { anxious: 3, romantic: 2 } },
-        { text: '自由空间，不被束缚', scores: { free: 3, independent: 2 } },
-        { text: '激情，心动的感觉', scores: { passionate: 3, brave: 2 } },
-        { text: '稳定，能走到结婚', scores: { cautious: 3, practical: 2 } },
+      { text: '关于表白，你倾向于？', options: [
+        { text: '等对方先表白', scores: { avoidant: 3, slowburn: 2 } },
+        { text: '主动表白，爱要大声说', scores: { pure: 3, romantic: 2 } },
+        { text: '暗示，让对方猜', scores: { player: 3, fox: 2 } },
+        { text: '不表白，顺其自然', scores: { zen: 3, independent: 2 } },
       ]},
-      { text: '分手后，你会？', options: [
-        { text: '立刻找新欢疗伤', scores: { rebound: 3, free: 2 } },
-        { text: '痛苦很久，走不出来', scores: { heartbroken: 3, anxious: 2 } },
-        { text: '分析原因，总结经验', scores: { rational: 3, strategist: 2 } },
-        { text: '无所谓，下一个更好', scores: { cool: 3, independent: 2 } },
+      { text: '恋爱后你的朋友圈？', options: [
+        { text: '天天秀恩爱', scores: { obsessed: 3, anxious: 2 } },
+        { text: '偶尔发，保持神秘', scores: { player: 3, fox: 2 } },
+        { text: '不发，恋爱是私事', scores: { avoidant: 3, independent: 2 } },
+        { text: '发但分组，仅对象可见', scores: { rational: 3, controller: 2 } },
       ]},
-      { text: '你理想的约会频率是？', options: [
-        { text: '每天见面，黏在一起', scores: { clingy: 3, passionate: 2 } },
-        { text: '一周2-3次，有空间', scores: { balanced: 3, romantic: 2 } },
-        { text: '一个月见几次就行', scores: { independent: 3, free: 2 } },
-        { text: '看心情，不固定', scores: { free: 3, cool: 2 } },
+      { text: '吵架后你通常？', options: [
+        { text: '主动道歉，求和好', scores: { pure: 3, anxious: 2 } },
+        { text: '冷战，等对方先开口', scores: { avoidant: 3, controller: 2 } },
+        { text: '讲道理，分析问题', scores: { rational: 3, secure: 2 } },
+        { text: '买礼物，哄对方开心', scores: { romantic: 3, obsessed: 2 } },
       ]},
-      { text: '你会为了爱情放弃什么？', options: [
-        { text: '什么都愿意放弃', scores: { devoted: 3, passionate: 2 } },
-        { text: '可以妥协一部分', scores: { accommodating: 3, balanced: 2 } },
-        { text: '事业/原则绝不放弃', scores: { independent: 3, rational: 2 } },
-        { text: '看对方值不值得', scores: { cautious: 3, strategist: 2 } },
+      { text: '你觉得恋爱多久可以结婚？', options: [
+        { text: '半年，闪婚', scores: { obsessed: 3, pure: 2 } },
+        { text: '1-2年，了解清楚', scores: { secure: 3, rational: 2 } },
+        { text: '3年以上，不着急', scores: { slowburn: 3, zen: 2 } },
+        { text: '不婚主义', scores: { independent: 3, player: 2 } },
       ]},
-      { text: '你对网恋的看法是？', options: [
-        { text: '真爱不分距离！', scores: { romantic: 3, brave: 2 } },
-        { text: '不太靠谱，谨慎对待', scores: { cautious: 3, rational: 2 } },
-        { text: '玩玩可以，认真算了', scores: { free: 3, cool: 2 } },
-        { text: '试过，被伤过', scores: { heartbroken: 3, overthink: 2 } },
-      ]},
-      { text: '你觉得爱情最重要的是？', options: [
-        { text: '信任和忠诚', scores: { trusting: 3, cautious: 2 } },
-        { text: '激情和浪漫', scores: { passionate: 3, romantic: 2 } },
-        { text: '理解和包容', scores: { accommodating: 3, balanced: 2 } },
-        { text: '共同成长', scores: { rational: 3, independent: 2 } },
+      { text: '如果分手，你会？', options: [
+        { text: '挽回，不惜一切', scores: { obsessed: 3, anxious: 2 } },
+        { text: '痛苦但接受', scores: { pure: 3, secure: 2 } },
+        { text: '立刻找下家', scores: { player: 3, independent: 2 } },
+        { text: '分析原因，总结经验', scores: { rational: 3, fox: 2 } },
       ]},
     ],
     types: {
-      passionate: { emoji: '🔥', name: '热情似火', code: 'FIRE-001', desc: '你的爱像一团火，热烈而直接！喜欢就追，爱就大声说出来。', tags: ['直球选手', '热情奔放', '爱要大声说'], bars: { '主动度': 95, '黏人度': 70, '理性度': 30, '忠诚度': 75 }},
-      romantic: { emoji: '🌹', name: '浪漫主义者', code: 'ROSE-002', desc: '你是行走的偶像剧！烛光晚餐、surprise礼物、手写情书——仪式感是你的恋爱必需品。', tags: ['仪式感控', '浪漫满屋', '细节控'], bars: { '主动度': 65, '黏人度': 60, '理性度': 40, '忠诚度': 80 }},
-      anxious: { emoji: '😰', name: '患得患失', code: 'WORRY-003', desc: 'TA晚回消息你就开始脑补分手大戏。你需要很多安全感。', tags: ['缺乏安全感', '敏感多疑', '需要确认'], bars: { '主动度': 50, '黏人度': 90, '理性度': 25, '忠诚度': 85 }},
-      cool: { emoji: '❄️', name: '冰山美人', code: 'ICE-004', desc: '你表面高冷，内心其实也有柔软的一面。只是不擅长表达。', tags: ['外冷内热', '不善表达', '需要时间'], bars: { '主动度': 20, '黏人度': 30, '理性度': 75, '忠诚度': 70 }},
-      independent: { emoji: '🦅', name: '独立自由', code: 'FREE-005', desc: '爱情是你的甜品，不是主食。你有自己的生活、朋友和追求。', tags: ['独立自主', '需要空间', '不黏人'], bars: { '主动度': 45, '黏人度': 15, '理性度': 80, '忠诚度': 65 }},
-      strategist: { emoji: '🎲', name: '恋爱军师', code: 'CHESS-006', desc: '你谈恋爱像在下棋，每一步都经过计算。但爱情不是博弈，真心才能换真心。', tags: ['运筹帷幄', '套路满满', '情商在线'], bars: { '主动度': 70, '黏人度': 40, '理性度': 90, '忠诚度': 60 }},
-      accommodating: { emoji: '🤗', name: '温柔体贴', code: 'KIND-007', desc: '你是恋爱中的"小棉袄"，总是优先考虑对方的感受。', tags: ['温柔体贴', '善解人意', '付出型'], bars: { '主动度': 55, '黏人度': 65, '理性度': 35, '忠诚度': 90 }},
-      free: { emoji: '🦋', name: '自由灵魂', code: 'SOUL-008', desc: '你像风一样自由，不喜欢被束缚。遇到懂你的人，你会停留。', tags: ['随性洒脱', '不受约束', '来去自由'], bars: { '主动度': 60, '黏人度': 20, '理性度': 60, '忠诚度': 50 }},
-      cautious: { emoji: '🛡️', name: '谨慎慢热', code: 'SAFE-009', desc: '你不会轻易打开心扉，需要很长时间观察和确认。但一旦认定，你就是最忠诚的伴侣。', tags: ['慢热谨慎', '观察期长', '一旦认定很专一'], bars: { '主动度': 30, '黏人度': 45, '理性度': 85, '忠诚度': 95 }},
-      heartbroken: { emoji: '💔', name: '情伤未愈', code: 'HURT-010', desc: '过去的感情经历让你带着伤痕。你不是不想爱，是害怕再受伤。', tags: ['受过伤', '害怕再爱', '需要疗愈'], bars: { '主动度': 25, '黏人度': 50, '理性度': 55, '忠诚度': 70 }},
-      rational: { emoji: '🧠', name: '理性恋爱', code: 'BRAIN-011', desc: '你用脑子谈恋爱！分析利弊、评估匹配度——你的恋爱有逻辑可循。', tags: ['理性分析', '权衡利弊', '逻辑控'], bars: { '主动度': 50, '黏人度': 35, '理性度': 95, '忠诚度': 75 }},
-      devoted: { emoji: '💖', name: '恋爱脑', code: 'LOVE-012', desc: '恋爱就是你的全世界！为了TA你可以放弃一切，TA就是你的太阳。', tags: ['全情投入', '为爱痴狂', '眼里只有TA'], bars: { '主动度': 85, '黏人度': 95, '理性度': 15, '忠诚度': 90 }},
+      pure: { emoji: '💝', name: '纯爱战士', code: 'PURE-001', desc: '一心一意，为爱冲锋。你相信真爱无敌，愿意为爱付出一切。', tags: ['一心一意', '真爱无敌', '为爱冲锋'], bars: { '主动度': 80, '黏人度': 75, '理性度': 30, '忠诚度': 95 }},
+      player: { emoji: '🧜', name: '海王/海后', code: 'SEA-002', desc: '鱼塘管理大师，广撒网多捕鱼。你享受被多人喜欢的感觉。', tags: ['鱼塘管理', '广撒网', '不主动不拒绝'], bars: { '主动度': 70, '黏人度': 20, '理性度': 60, '忠诚度': 15 }},
+      avoidant: { emoji: '🏃', name: '回避型', code: 'AVOID-003', desc: '越喜欢越逃避，亲密让你窒息。你需要大量个人空间。', tags: ['越爱越逃', '需要空间', '害怕亲密'], bars: { '主动度': 25, '黏人度': 10, '理性度': 70, '忠诚度': 50 }},
+      anxious: { emoji: '😰', name: '焦虑型', code: 'ANX-004', desc: '患得患失，缺乏安全感。对方晚回消息就脑补一部狗血剧。', tags: ['患得患失', '缺乏安全感', '脑补大师'], bars: { '主动度': 60, '黏人度': 90, '理性度': 35, '忠诚度': 70 }},
+      secure: { emoji: '🛡️', name: '安全型', code: 'SAFE-005', desc: '健康恋爱的典范。情绪稳定，既独立又亲密，完美伴侣。', tags: ['情绪稳定', '独立亲密', '完美伴侣'], bars: { '主动度': 65, '黏人度': 50, '理性度': 75, '忠诚度': 85 }},
+      obsessed: { emoji: '🧠', name: '恋爱脑', code: 'BRAIN-006', desc: '一恋爱就降智，全世界只有ta。为了爱情可以放弃一切。', tags: ['一恋爱就降智', '全世界只有ta', '为爱疯狂'], bars: { '主动度': 90, '黏人度': 95, '理性度': 15, '忠诚度': 80 }},
+      rational: { emoji: '🧮', name: '理智型', code: 'RAT-007', desc: '恋爱也要算ROI，不合适就分手。你的脑子比 heart 大。', tags: ['恋爱算ROI', '理性决策', '及时止损'], bars: { '主动度': 50, '黏人度': 30, '理性度': 95, '忠诚度': 60 }},
+      romantic: { emoji: '🌹', name: '浪漫主义者', code: 'ROM-008', desc: '仪式感是必须的，每天都要像情人节。你活在偶像剧里。', tags: ['仪式感', '偶像剧', '浪漫至上'], bars: { '主动度': 75, '黏人度': 65, '理性度': 40, '忠诚度': 75 }},
+      independent: { emoji: '🦅', name: '独立型', code: 'IND-009', desc: '恋爱不如搞钱，单身保平安。你一个人活成了一支队伍。', tags: ['单身保平安', '独自精彩', '不需要爱情'], bars: { '主动度': 35, '黏人度': 15, '理性度': 85, '忠诚度': 40 }},
+      controller: { emoji: '🔒', name: '控制狂', code: 'CTRL-010', desc: '占有欲强到离谱，ta的手机就是你的手机。查岗是日常。', tags: ['占有欲强', '查岗日常', '控制欲'], bars: { '主动度': 70, '黏人度': 85, '理性度': 45, '忠诚度': 65 }},
+      slowburn: { emoji: '🐌', name: '慢热型', code: 'SLOW-011', desc: '需要很长时间才能打开心扉，但一旦爱上就是一辈子。', tags: ['慢热', '长情', '一旦爱上就是一辈子'], bars: { '主动度': 30, '黏人度': 40, '理性度': 60, '忠诚度': 90 }},
+      zen: { emoji: '☯️', name: '佛系恋爱', code: 'ZEN-012', desc: '随缘，不主动不拒绝。恋爱是锦上添花，不是雪中送炭。', tags: ['佛系', '随缘', '不主动不拒绝'], bars: { '主动度': 40, '黏人度': 35, '理性度': 70, '忠诚度': 55 }},
     }
   }
 };
 
 // ========== 状态 ==========
-let currentTest = null;
-let currentQ = 0;
-let scores = {};
+let currentTest = '', currentQ = 0, scores = {};
 
 // ========== 页面切换 ==========
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
 }
 
-function backHome() {
+function goHome() {
+  currentTest = ''; currentQ = 0; scores = {};
   showPage('page-home');
 }
 
 // ========== 开始测试 ==========
 function startTest(type) {
-  currentTest = type;
-  currentQ = 0;
-  scores = {};
+  currentTest = type; currentQ = 0; scores = {};
   const data = TEST_DATA[type];
   
   // 生成导航
@@ -612,12 +593,12 @@ function showPaywall() {
   if (CONFIG.wechatQrUrl && CONFIG.wechatQrUrl !== '') {
     document.getElementById('wechatQr').innerHTML = '<img src="' + CONFIG.wechatQrUrl + '" alt="微信收款码">';
   } else {
-    document.getElementById('wechatQr').innerHTML = '<div class="modal-qr-text">微信</div>';
+    document.getElementById('wechatQr').innerHTML = '<div style="color:var(--text2);font-size:12px;">微信</div>';
   }
   if (CONFIG.alipayQrUrl && CONFIG.alipayQrUrl !== '') {
     document.getElementById('alipayQr').innerHTML = '<img src="' + CONFIG.alipayQrUrl + '" alt="支付宝收款码">';
   } else {
-    document.getElementById('alipayQr').innerHTML = '<div class="modal-qr-text">支付宝</div>';
+    document.getElementById('alipayQr').innerHTML = '<div style="color:var(--text2);font-size:12px;">支付宝</div>';
   }
 }
 
@@ -647,6 +628,7 @@ function verifyVipKey() {
 function showFullReport() {
   // 显示完整报告内容
   const type = TEST_DATA[window._resultTest].types[window._resultType];
+  
   const fullReport = `
     <div style="margin-top:20px;text-align:left;">
       <h3 style="color:var(--gold);font-size:16px;margin-bottom:10px;">📊 完整分析报告</h3>
