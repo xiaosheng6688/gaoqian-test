@@ -3,533 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta property="og:title" content="2026搞钱人格鉴定 - 测测你是哪种搞钱体质">
-<meta property="og:description" content="12道题测出你的隐藏搞钱人格！你是守财龟还是梭哈王？">
-<meta property="og:image" content="https://img.icons8.com/color/200/money-bag.png">
-<title>2026搞钱人格鉴定</title>
+<meta property="og:title" content="2026人格测试大全 - 搞钱/职场/恋爱">
+<meta property="og:description" content="测测你的隐藏人格！搞钱、职场、恋爱三大维度全面解析">
+<meta property="og:image" content="https://img.icons8.com/color/200/crystal-ball.png">
+<title>2026人格测试大全</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--gold:#f5a623;--gold-dark:#d4881a;--gold-light:#ffe8b8;--bg:#1a1a2e;--bg2:#16213e;--text:#fff;--text2:#aab;--accent:#ff6b6b;--green:#51cf66;--purple:#9775fa}
+:root{--gold:#f5a623;--bg:#1a1a2e;--bg2:#16213e;--text:#fff;--text2:#aab;--accent:#ff6b6b}
 body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
-.page{display:none;min-height:100vh;padding:20px;flex-direction:column;align-items:center;justify-content:center}
-.page.active{display:flex}
-/* Landing */
-.landing-title{font-size:28px;font-weight:800;text-align:center;background:linear-gradient(135deg,var(--gold),#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;line-height:1.3}
+.page{display:flex;min-height:100vh;padding:20px;flex-direction:column;align-items:center;justify-content:center}
+.landing-title{font-size:32px;font-weight:800;text-align:center;background:linear-gradient(135deg,var(--gold),#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;line-height:1.3}
 .landing-sub{font-size:15px;color:var(--text2);text-align:center;margin-bottom:30px;line-height:1.6}
-.landing-icon{font-size:80px;text-align:center;margin-bottom:20px;animation:bounce 2s infinite}
-.landing-count{font-size:13px;color:var(--gold);text-align:center;margin-bottom:20px}
-.btn-start{background:linear-gradient(135deg,var(--gold),var(--accent));color:#fff;border:none;padding:16px 60px;font-size:18px;font-weight:700;border-radius:50px;cursor:pointer;box-shadow:0 4px 20px rgba(245,166,35,0.4);transition:transform .2s,box-shadow .2s}
-.btn-start:active{transform:scale(0.95);box-shadow:0 2px 10px rgba(245,166,35,0.3)}
-.tag-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:20px 0;max-width:340px}
-.tag{padding:4px 12px;background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.3);border-radius:20px;font-size:12px;color:var(--gold)}
-/* Question */
-.progress-bar{width:100%;max-width:400px;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;margin-bottom:30px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--accent));border-radius:3px;transition:width .4s ease}
-.q-num{font-size:13px;color:var(--gold);margin-bottom:8px;text-align:center}
-.q-text{font-size:20px;font-weight:700;text-align:center;margin-bottom:30px;line-height:1.5;max-width:360px}
-.options{width:100%;max-width:400px;display:flex;flex-direction:column;gap:12px}
-.opt{padding:16px 20px;background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.1);border-radius:14px;cursor:pointer;transition:all .25s;font-size:15px;line-height:1.5}
-.opt:active{transform:scale(0.97)}
-.opt.selected{border-color:var(--gold);background:rgba(245,166,35,0.12)}
-/* Calculating */
-.calc-icon{font-size:60px;animation:spin 2s linear infinite;margin-bottom:20px}
-.calc-text{font-size:18px;color:var(--gold);text-align:center;margin-bottom:20px}
-.calc-percent{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.calc-hints{margin-top:30px;text-align:center}
-.calc-hint{font-size:14px;color:var(--text2);margin:6px 0;opacity:0;animation:fadeIn .5s forwards}
-/* Result */
-.result-card{width:100%;max-width:380px;background:linear-gradient(145deg,rgba(245,166,35,0.15),rgba(255,107,107,0.1));border:2px solid rgba(245,166,35,0.3);border-radius:24px;padding:30px;text-align:center;position:relative;overflow:hidden}
-.result-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.05),transparent 70%);animation:glow 3s ease-in-out infinite}
-.result-emoji{font-size:72px;margin-bottom:10px;position:relative}
-.result-type{font-size:26px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;position:relative}
-.result-code{font-size:13px;color:var(--gold);opacity:0.7;margin-bottom:16px;position:relative;letter-spacing:2px}
-.result-desc{font-size:15px;color:var(--text2);line-height:1.7;position:relative;margin-bottom:16px}
-.result-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;position:relative}
-.result-tag{padding:4px 14px;background:rgba(245,166,35,0.15);border-radius:20px;font-size:12px;color:var(--gold)}
-.result-bar{margin:16px 0;position:relative}
-.bar-row{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:13px}
-.bar-label{width:60px;text-align:right;color:var(--text2);flex-shrink:0}
-.bar-track{flex:1;height:8px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden}
-.bar-value{height:100%;border-radius:4px;transition:width 1s ease}
-.bar-num{width:35px;font-size:12px;color:var(--text2)}
-.btn-group{display:flex;flex-direction:column;gap:12px;width:100%;max-width:380px;margin-top:24px}
-.btn-unlock{background:linear-gradient(135deg,var(--gold),#ff8c00);color:#fff;border:none;padding:16px;font-size:16px;font-weight:700;border-radius:14px;cursor:pointer;box-shadow:0 4px 20px rgba(245,166,35,0.4);position:relative;overflow:hidden}
-.btn-unlock::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,0.1),transparent);animation:shine 3s infinite}
-.btn-share{background:rgba(255,255,255,0.08);color:var(--text);border:1px solid rgba(255,255,255,0.15);padding:14px;font-size:15px;font-weight:600;border-radius:14px;cursor:pointer}
-.btn-retry{background:transparent;color:var(--text2);border:none;padding:12px;font-size:14px;cursor:pointer}
-/* Modal */
-.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:100;align-items:center;justify-content:center;padding:20px}
-.modal-overlay.active{display:flex}
-.modal{background:var(--bg2);border-radius:20px;padding:24px;max-width:360px;width:100%;text-align:center;position:relative;animation:slideUp .3s ease}
-.modal-title{font-size:18px;font-weight:700;margin-bottom:8px}
-.modal-sub{font-size:14px;color:var(--text2);margin-bottom:20px;line-height:1.6}
-.modal-price{font-size:36px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
-.modal-qr{width:180px;height:180px;background:rgba(255,255,255,0.05);border:2px dashed rgba(245,166,35,0.3);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;overflow:hidden}
-.modal-qr img{width:100%;height:100%;object-fit:contain}
-.modal-qr-text{font-size:40px;color:rgba(245,166,35,0.3)}
-.modal-wechat{font-size:14px;color:var(--gold);margin:12px 0}
-.modal-steps{text-align:left;font-size:13px;color:var(--text2);line-height:2;margin:16px 0;padding:0 10px}
-.modal-steps span{color:var(--gold);font-weight:600}
-.modal-close{position:absolute;top:12px;right:16px;font-size:24px;color:var(--text2);cursor:pointer;background:none;border:none;padding:4px}
-.modal-report-preview{background:rgba(255,255,255,0.05);border-radius:12px;padding:16px;margin:16px 0;text-align:left}
-.modal-report-preview h4{color:var(--gold);font-size:14px;margin-bottom:8px}
-.modal-report-preview li{font-size:13px;color:var(--text2);margin:4px 0;list-style:none;padding-left:16px;position:relative}
-.modal-report-preview li::before{content:'✨';position:absolute;left:0}
-/* Animations */
+.landing-icon{font-size:60px;text-align:center;margin-bottom:20px;animation:bounce 2s infinite}
+.test-cards{display:flex;flex-direction:column;gap:16px;width:100%;max-width:380px;margin-top:10px}
+.test-card{background:linear-gradient(145deg,rgba(245,166,35,0.1),rgba(255,107,107,0.05));border:2px solid rgba(245,166,35,0.2);border-radius:20px;padding:24px;text-align:left;cursor:pointer;transition:all .3s;text-decoration:none;color:var(--text);display:block}
+.test-card:hover,.test-card:active{border-color:rgba(245,166,35,0.5);transform:translateY(-2px)}
+.test-card-emoji{font-size:40px;margin-bottom:8px}
+.test-card-title{font-size:18px;font-weight:700;color:var(--gold);margin-bottom:6px}
+.test-card-desc{font-size:13px;color:var(--text2);line-height:1.5}
+.test-card-tag{display:inline-block;padding:3px 10px;background:rgba(245,166,35,0.15);border-radius:12px;font-size:11px;color:var(--gold);margin-top:10px}
+.footer{margin-top:30px;font-size:12px;color:var(--text2);text-align:center;opacity:0.6}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-@keyframes fadeIn{to{opacity:1}}
-@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
-@keyframes shine{0%{transform:translateX(-100%) rotate(45deg)}100%{transform:translateX(100%) rotate(45deg)}}
-@keyframes glow{0%,100%{opacity:0.5}50%{opacity:1}}
-/* Particles */
 .particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
 .particle{position:absolute;width:4px;height:4px;background:var(--gold);border-radius:50%;opacity:0.3;animation:float 6s infinite}
 @keyframes float{0%,100%{transform:translateY(0) translateX(0);opacity:0.3}50%{transform:translateY(-100px) translateX(30px);opacity:0.6}}
-/* Responsive */
-@media(min-width:500px){.result-card{padding:40px}.landing-title{font-size:34px}}
+@media(min-width:500px){.landing-title{font-size:38px}}
 </style>
 </head>
 <body>
 <div class="particles" id="particles"></div>
 
-<!-- Landing Page -->
-<div class="page active" id="page-landing">
-  <div class="landing-icon">💰</div>
-  <h1 class="landing-title">2026搞钱人格鉴定</h1>
-  <p class="landing-sub">12道题，2分钟<br>测出你的隐藏搞钱DNA<br>看看你是哪种搞钱体质！</p>
-  <div class="tag-list">
-    <span class="tag">🐢 守财龟</span>
-    <span class="tag">🎰 梭哈王</span>
-    <span class="tag">🦊 算盘精</span>
-    <span class="tag">💎 败家子</span>
-    <span class="tag">🦄 搞钱达人</span>
-    <span class="tag">🌊 佛系穷</span>
+<div class="page">
+  <div class="landing-icon">🔮</div>
+  <h1 class="landing-title">2026人格测试大全</h1>
+  <p class="landing-sub">三大维度，全面解析你的隐藏人格<br>搞钱 · 职场 · 恋爱，测测你是哪种体质</p>
+  
+  <div class="test-cards">
+    <a href="money-test.html" class="test-card">
+      <div class="test-card-emoji">💰</div>
+      <div class="test-card-title">搞钱人格鉴定</div>
+      <div class="test-card-desc">12道题测出你的隐藏搞钱DNA！你是守财龟还是梭哈王？</div>
+      <span class="test-card-tag">🐢 12种搞钱人格</span>
+    </a>
+    
+    <a href="work-test.html" class="test-card">
+      <div class="test-card-emoji">💼</div>
+      <div class="test-card-title">职场人格鉴定</div>
+      <div class="test-card-desc">12道题测出你的隐藏职场DNA！你是老黄牛还是野心家？</div>
+      <span class="test-card-tag">🚀 12种职场人格</span>
+    </a>
+    
+    <a href="love-test.html" class="test-card">
+      <div class="test-card-emoji">💕</div>
+      <div class="test-card-title">恋爱人格鉴定</div>
+      <div class="test-card-desc">12道题测出你的隐藏恋爱DNA！你是恋爱脑还是冰山美人？</div>
+      <span class="test-card-tag">💘 12种恋爱人格</span>
+    </a>
   </div>
-  <div class="landing-count" id="testCount">🔥 已有 28,647 人完成测试</div>
-  <button class="btn-start" onclick="startTest()">开始鉴定 🧬</button>
-</div>
-
-<!-- Question Page -->
-<div class="page" id="page-question">
-  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-  <div class="q-num" id="qNum"></div>
-  <div class="q-text" id="qText"></div>
-  <div class="options" id="options"></div>
-</div>
-
-<!-- Calculating Page -->
-<div class="page" id="page-calc">
-  <div class="calc-icon">🧬</div>
-  <div class="calc-text">正在分析你的搞钱DNA...</div>
-  <div class="calc-percent" id="calcPercent">0%</div>
-  <div class="calc-hints">
-    <div class="calc-hint" style="animation-delay:0.5s">🔬 提取消费基因...</div>
-    <div class="calc-hint" style="animation-delay:1.5s">📊 匹配搞钱模型...</div>
-    <div class="calc-hint" style="animation-delay:2.5s">🎯 生成专属人格...</div>
-  </div>
-</div>
-
-<!-- Result Page -->
-<div class="page" id="page-result">
-  <div class="result-card">
-    <div class="result-emoji" id="resultEmoji"></div>
-    <div class="result-type" id="resultType"></div>
-    <div class="result-code" id="resultCode"></div>
-    <div class="result-desc" id="resultDesc"></div>
-    <div class="result-tags" id="resultTags"></div>
-    <div class="result-bar" id="resultBars"></div>
-  </div>
-  <div class="btn-group">
-    <button class="btn-unlock" onclick="showPaywall()">🔐 解锁完整搞钱分析报告</button>
-    <button class="btn-share" onclick="shareResult()">📤 分享给好友测测</button>
-    <button class="btn-retry" onclick="retryTest()">🔄 再测一次</button>
-  </div>
-</div>
-
-<!-- Paywall Modal -->
-<div class="modal-overlay" id="modalPaywall">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <div class="modal-title">🔒 解锁完整搞钱分析报告</div>
-    <div class="modal-sub">你的搞钱人格远不止表面这些<br>解锁深度报告，获取专属搞钱攻略</div>
-    <div class="modal-price">¥ 5.9</div>
-    <div class="modal-report-preview">
-      <h4>报告包含：</h4>
-      <ul>
-        <li>搞钱人格深度解析（1500字）</li>
-        <li>你的搞钱优势与致命盲区</li>
-        <li>2026年最适合你的搞钱方向</li>
-        <li>避坑指南：你最易踩的理财坑</li>
-        <li>搞钱幸运色/数字/月份</li>
-      </ul>
-    </div>
-    <div class="modal-qr" id="wechatQr">
-      <div class="modal-qr-text">微信</div>
-    </div>
-    <div class="modal-wechat">微信扫码支付，备注"搞钱报告"</div>
-    <div class="modal-qr" id="alipayQr" style="margin-top:8px">
-      <div class="modal-qr-text">支付宝</div>
-    </div>
-    <div style="font-size:13px;color:var(--text2);margin-top:8px">支付宝扫码支付</div>
-    <div class="modal-steps">
-      <span>①</span> 扫码支付 ¥5.9<br>
-      <span>②</span> 添加微信 <span style="color:var(--accent)" id="modalWxId"></span><br>
-      <span>③</span> 发送支付截图 + 你的测试结果<br>
-      <span>④</span> 获取你的专属搞钱分析报告 ✅
-    </div>
-  </div>
+  
+  <div class="footer">🔥 已有 86,432 人完成测试<br>测试仅供娱乐，结果无科学依据</div>
 </div>
 
 <script>
-// ============ 配置区（修改这里即可） ============
-const CONFIG = {
-  wechatId: 'z6ys8866',
-  wechatQrUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAisAAAIrAQAAAAAG1eSFAAAEbElEQVR4nO2d31IqMQzGk8IM3uEbrG+Cb3bwzfRN5A3gTmaUnEn6Z7srWRDRoed8vwuldsmw39ZOmqSFha7AJlzDChHM+EAbH2jjA218oI0PtPGBNtPafHBFKM1H7ReeE9EuNTlKqc3CXTZzBQLMuEAbH2jzS9osJFM6OnniNRHLnpk7eSWiJ656E+8/8Gm+Tfi+CQVmfKDNf6YN2T/7QrbW+CPEpbnSieCQLuvkWXsV7dWmehh2scjrbd1UgBkXaOMDbXx0YTFiJnteyubhhf+stWlOw4ZXQiREH0feAYmnwPDzgTYNa/MRww5GCUqs4kokhiwavKlLCBe96xMw4wNtWtFmnn4v++jETPZ3O+7sD/Zjf5d7OTsYujD5gU8TYMYF2vhAm1/SZl9yGOZRLC1G8cJr9Si0ueGHeLnGNtXf2OTr00SDJ+UDbXygTSvazM2FOBajYF1tpF5tapcIj9yP636aADMu0MYH2vxa1kMsAVrR9dnS2FslQZYidRIEWY9JMIp9oE1bE0VkJWttirzZVGAcaCbSJ0/VwYhYejQ3kR5t5oEHmHGBNtPazOTNXqeghDoJmxSUsOae783BYE4exW4csoDEE2D4+UCb9gquut6F6D0KosFao/TGlQg8ivYeeIAZF2gzQbXWKGEHnRle4wutvVRSKaYymlWw9DgBhp8PtGlFm7n9XMiOO5saREKslOjk5THVURAtt7Ey0+ooUk7kmYhZbvKmAsy4QBsfaHM6mBlXE1qynehEYmwz5kQU2yOm5J0gqYlg5iQYfj7Qpq2lR0Wf5ljpRFE3jTirRLAprL0HHmDGBdqc1iYmMp7ieRTVXo9Z2WZeciL9eRQptgmJJ8Hw84E2rXkU236tobFNStHL0ltdnHursgrUUTTzwAPMuECb82IUiZwApUHtZa7MTDNDDGjgPIozwPDzgTataENVuNIqJWrWdXrU/I3DsDITwczmHniAGRdoc17BVVUpIXWFVaSsRLK/QTpvYK/HSTD8fKBNe0sP6fOhuRST8uJiWwclqokigxhFMw88wIwLtJlgUCmRSiOqYOYhXRaXHhWphBsexUkw/HygTbMxisNwZuBx4US/9LCTeOFRNPbAA8y4QJvztpmXU7hzoabUWY+SBBlcjIniJBh+PtCm1ROuJP7ase461xjFQY/d3t2nIzQlEC2sxEp3gpAeeGXN27qpADMu0MYH2nzpm8Li/tCIfKRTMdMhmWF8HkUMaEDiCTD8fKBNw8HM92qtISUBOmyijqLVBx5gxgXafPGbwvr0qOTdHKMkSLy4P28TEvtAGx9o07Q2i7J7lGfjo3f7Eu6yEmnjpr5OuOA9R4AZH2jTsDYzeUv7Qy3roZtJY1Ai+Rt6hKaGOkX6Lw67+Zu6hHDRuz4BMz7QpvGCq2Xa9pWCEqOz73Ko08DSo6kHHmDGBdqcW0dRHZJJx06qGcQ2UcJ9Hhh+PtCmFW3405d+XcLmtm4qwIwLtPGBNj7Qxgfa+EAbn39Sm7+oQ4hnNCBE9gAAAABJRU5ErkJggg==',
-  alipayQrUrl: 'data:image/png;base64,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',
-  price: 5.9,
-  testTitle: '2026搞钱人格鉴定',
-};
-
-// ============ 题目数据 ============
-const QUESTIONS = [
-  {
-    text: '发工资的第一件事，你会做什么？',
-    options: [
-      { text: '先存一半，剩下的慢慢花', scores: { turtle: 3, analyst: 2 } },
-      { text: '立刻还信用卡和花呗', scores: { bee: 3, turtle: 2 } },
-      { text: '先犒劳自己！吃顿好的！', scores: { spender: 3, gambler: 2 } },
-      { text: '转到理财账户，让钱生钱', scores: { fox: 3, analyst: 2 } },
-    ]
-  },
-  {
-    text: '朋友约你周末出去，你会？',
-    options: [
-      { text: 'AA制，各付各的', scores: { turtle: 3, analyst: 2 } },
-      { text: '我请客！下次你请就行', scores: { social: 3, fox: 2 } },
-      { text: '看心情，想去就去', scores: { zen: 3, creative: 2 } },
-      { text: '先问去哪，算算预算', scores: { analyst: 3, hunter: 2 } },
-    ]
-  },
-  {
-    text: '刷手机看到喜欢的东西但有点贵，你会？',
-    options: [
-      { text: '加入购物车，等打折再买', scores: { turtle: 3, fox: 2 } },
-      { text: '纠结3秒，然后直接下单！', scores: { spender: 3, gambler: 2 } },
-      { text: '全网比价，找最便宜的', scores: { analyst: 3, bee: 2 } },
-      { text: '想想能不能转手赚一笔', scores: { dreamer: 3, social: 2 } },
-    ]
-  },
-  {
-    text: '关于理财，你的态度是？',
-    options: [
-      { text: '定投基金，长期持有', scores: { turtle: 3, analyst: 2 } },
-      { text: '梭哈！高风险高回报！', scores: { gambler: 3, dreamer: 2 } },
-      { text: '理财不如提升自己赚更多', scores: { bee: 3, hunter: 2 } },
-      { text: '钱是赚出来的，不是省出来的', scores: { social: 3, hidden: 2 } },
-    ]
-  },
-  {
-    text: '如果你突然得到10万块，你会？',
-    options: [
-      { text: '存银行定期，安全第一', scores: { turtle: 3, zen: 1 } },
-      { text: '投资学习，提升技能', scores: { hunter: 3, bee: 2 } },
-      { text: '搞副业创业！搏一搏！', scores: { dreamer: 3, creative: 2 } },
-      { text: '请朋友们大吃一顿！', scores: { social: 3, spender: 2 } },
-    ]
-  },
-  {
-    text: '选择工作时，你最看重什么？',
-    options: [
-      { text: '稳定，越久越好', scores: { turtle: 3, zen: 2 } },
-      { text: '成长空间和学习机会', scores: { hunter: 3, bee: 2 } },
-      { text: '薪资！给够就行', scores: { hidden: 3, fox: 2 } },
-      { text: '人脉资源和社交圈', scores: { social: 3, creative: 2 } },
-    ]
-  },
-  {
-    text: '关于消费，你更倾向？',
-    options: [
-      { text: '能省则省，够用就好', scores: { turtle: 3, bee: 2 } },
-      { text: '买就买最好的！', scores: { spender: 3, hidden: 2 } },
-      { text: '看心情，想买就买', scores: { gambler: 3, zen: 2 } },
-      { text: '只买能升值的', scores: { fox: 3, dreamer: 2 } },
-    ]
-  },
-  {
-    text: '面对一个投资机会，你会？',
-    options: [
-      { text: '先研究半天再决定', scores: { analyst: 3, fox: 2 } },
-      { text: '感觉不错就上车！', scores: { gambler: 3, dreamer: 2 } },
-      { text: '问问身边懂的朋友', scores: { social: 3, zen: 2 } },
-      { text: '错过就错过，不追', scores: { turtle: 3, hunter: 2 } },
-    ]
-  },
-  {
-    text: '你的购物习惯是？',
-    options: [
-      { text: '列好清单，按需购买', scores: { hunter: 3, analyst: 2 } },
-      { text: '逛着逛着就买了一堆', scores: { spender: 3, zen: 2 } },
-      { text: '到处比价找优惠券', scores: { bee: 3, fox: 2 } },
-      { text: '朋友推荐啥就买啥', scores: { social: 3, creative: 2 } },
-    ]
-  },
-  {
-    text: '关于未来规划，你？',
-    options: [
-      { text: '有详细的5年计划', scores: { hunter: 3, analyst: 2 } },
-      { text: '走一步看一步', scores: { zen: 3, creative: 2 } },
-      { text: '只规划搞钱的部分', scores: { hidden: 3, fox: 2 } },
-      { text: '规划太累了，先享受当下', scores: { spender: 3, gambler: 2 } },
-    ]
-  },
-  {
-    text: '朋友找你借钱，你会？',
-    options: [
-      { text: '看关系远近决定', scores: { social: 3, zen: 2 } },
-      { text: '原则上不借', scores: { turtle: 3, analyst: 2 } },
-      { text: '借！朋友之间不谈钱', scores: { spender: 3, bee: 2 } },
-      { text: '借可以，写借条算利息', scores: { fox: 3, hidden: 2 } },
-    ]
-  },
-  {
-    text: '你觉得最有价值的投资是？',
-    options: [
-      { text: '房产，看得见摸得着', scores: { turtle: 3, hunter: 2 } },
-      { text: '自己，知识和技能', scores: { bee: 3, creative: 2 } },
-      { text: '人脉，关系就是生产力', scores: { social: 3, hidden: 2 } },
-      { text: '新兴行业，抢占先机！', scores: { dreamer: 3, gambler: 2 } },
-    ]
-  },
-];
-
-// ============ 人格类型数据 ============
-const TYPES = {
-  turtle: {
-    emoji: '🐢', name: '守财龟', code: 'SAVE-001',
-    desc: '你的字典里没有"冲动消费"四个字。每一分钱都要花在刀刃上，存钱的快乐远超花钱。你是朋友圈里的"省钱天花板"，但偶尔也要善待自己哦～',
-    tags: ['能省则省', '存钱快乐', '安全第一'],
-    bars: { 消费力: 15, 风险值: 10, 社交力: 35, 搞钱力: 55 },
-    detail: '守财龟是最稳健的搞钱人格。你天生对金钱有强烈的保护欲，每一笔支出都要经过深思熟虑。你的存钱能力令人叹服，但有时过于保守会让你错失机会。2026年，建议你在保持储蓄习惯的同时，拿出10%的闲钱尝试低风险投资，让钱真正"生钱"。适合你的搞钱方向：基金定投、可转债打新、银行结构性存款。你最易踩的坑：通胀侵蚀——把钱全放银行，实际在缩水。'
-  },
-  fox: {
-    emoji: '🦊', name: '算盘精', code: 'CALC-002',
-    desc: '你的脑子就是一台行走的计算器。买东西要比价、投资要算ROI、请客也要算人情账。精明不是小气，是不花冤枉钱的智慧！',
-    tags: ['精打细算', '绝不吃亏', '投资高手'],
-    bars: { 消费力: 30, 风险值: 40, 社交力: 45, 搞钱力: 80 },
-    detail: '算盘精是最具投资天赋的搞钱人格。你善于发现价值洼地，总能在别人看不到机会的地方淘到金。你的分析能力是一把双刃剑——能帮你避坑，但过度分析也会让你错过转瞬即逝的机会。2026年，建议你在充分调研后果断出手，不要让"完美时机"成为"永远不动"的借口。适合你的搞钱方向：价值投资、套利交易、知识付费。你最易踩的坑：过度优化——总想等到最低点买入，结果一路踏空。'
-  },
-  bee: {
-    emoji: '🐝', name: '搬砖蜂', code: 'WORK-003',
-    desc: '你坚信勤劳致富，用汗水和时间换取每一分钱。你不是不想走捷径，是觉得踏实赚来的钱才最安心。你的努力值得被看见！',
-    tags: ['勤劳致富', '脚踏实地', '靠实力说话'],
-    bars: { 消费力: 25, 风险值: 20, 社交力: 40, 搞钱力: 65 },
-    detail: '搬砖蜂是最靠谱的搞钱人格。你的勤奋和踏实是最大的财富，靠双手赚钱从不心虚。但在这个时代，光靠卖时间赚钱是有天花板的。2026年，建议你在努力工作的同时，思考如何将你的技能产品化、规模化，让同一份时间卖出多次。适合你的搞钱方向：技能变现、线上课程、自由职业接单、副业。你最易踩的坑：用战术勤奋掩盖战略懒惰——拼命干活却不思考方向。'
-  },
-  gambler: {
-    emoji: '🎰', name: '梭哈王', code: 'ALLIN-004',
-    desc: '你的座右铭是"人生就是一场豪赌"！高风险高回报才是你的菜，稳健理财？不存在的。你不是在梭哈，就是在准备梭哈的路上！',
-    tags: ['高风险高回报', '人生豪赌', '梭哈选手'],
-    bars: { 消费力: 75, 风险值: 95, 社交力: 60, 搞钱力: 50 },
-    detail: '梭哈王是最刺激的搞钱人格。你天生敢赌，这让你有机会获得超额收益，但也让你经常体验过山车般的资产波动。你的胆量是优势，但缺乏风控意识是致命弱点。2026年，建议你设立严格的止损线和仓位管理规则，把"梭哈"变成"计算后的冒险"。适合你的搞钱方向：加密货币、创业投资、短线交易（但必须设止损！）。你最易踩的坑：追涨杀跌——在最高点满仓，在最低点割肉。'
-  },
-  spender: {
-    emoji: '💎', name: '败家子', code: 'SPEND-005',
-    desc: '花钱使你快乐！赚钱是为了花，不花留着过年吗？品质生活是你的信仰，你值得拥有最好的——但月底的钱包可能在哭泣。',
-    tags: ['花钱快乐', '品质生活', '先享受再说'],
-    bars: { 消费力: 95, 风险值: 55, 社交力: 70, 搞钱力: 30 },
-    detail: '败家子是最会享受生活的搞钱人格。你对生活品质的追求让你花钱如流水，但你的消费品味也让你在社交中自带光环。2026年，建议你学会"延迟满足"——在花钱前问自己三个问题：真的需要吗？现在就需要吗？有没有更划算的选择？适合你的搞钱方向：直播带货、好物种草、生活方式KOL、二手倒卖。你最易踩的坑：消费陷阱——分期付款和花呗让你在不知不觉中超支。'
-  },
-  dreamer: {
-    emoji: '🦄', name: '搞钱达人', code: 'MONEY-006',
-    desc: '你的脑洞就是你的印钞机！总能想出各种搞钱的点子，路子野思路广。虽然不是每个想法都能落地，但总有一个会让你起飞！',
-    tags: ['脑洞印钞机', '路子野', '钱生钱'],
-    bars: { 消费力: 50, 风险值: 70, 社交力: 55, 搞钱力: 90 },
-    detail: '搞钱达人是最具创新力的搞钱人格。你总能在别人看不到的地方发现商机，你的点子是你最大的资产。但点子不值钱，执行力才值钱。2026年，建议你精选1-2个最可行的想法，专注执行到底，而不是同时追10个兔子。适合你的搞钱方向：信息差套利、新平台早期红利、AI工具创业、社群运营。你最易踩的坑：光想不做——点子很丰满，执行力很骨感。'
-  },
-  zen: {
-    emoji: '🌊', name: '佛系穷', code: 'CHILL-007',
-    desc: '钱多钱少无所谓，开心就好。你活出了很多人向往的洒脱，但偶尔也会被余额提醒拉回现实。佛系不是摆烂，是另一种智慧。',
-    tags: ['佛系随缘', '开心就好', '不卷不争'],
-    bars: { 消费力: 40, 风险值: 25, 社交力: 45, 搞钱力: 20 },
-    detail: '佛系穷是最通透的搞钱人格。你不会被金钱绑架，这是很多人羡慕的境界。但现实是，一定的经济基础是洒脱的底气。2026年，建议你不必拼命搞钱，但至少建立3-6个月的应急基金，让"佛系"有底气而非无奈。适合你的搞钱方向：被动收入（版权、分红）、极简生活博主、低成本副业。你最易踩的坑：温水煮青蛙——等你真正需要钱的时候，才发现自己没有任何准备。'
-  },
-  hunter: {
-    emoji: '🎯', name: '卷王', code: 'GRIND-008',
-    desc: '不卷到第一不罢休！赚钱也一样，你制定了目标就一定达成。你的执行力和自律令人叹服，但别把自己逼太紧了。',
-    tags: ['目标导向', '自律达人', '不卷不行'],
-    bars: { 消费力: 35, 风险值: 45, 社交力: 50, 搞钱力: 85 },
-    detail: '卷王是最有执行力的搞钱人格。你的目标感和自律让你在搞钱路上碾压大多数人，你的日历上没有"休息日"三个字。但搞钱是马拉松不是百米冲刺，2026年，建议你给自己留出思考和复盘的时间，有时候方向比速度更重要。适合你的搞钱方向：职业晋升、考证变现、高端咨询、效率工具。你最易踩的坑：职业倦怠——拼命搞钱赚到钱了，但失去了健康和快乐。'
-  },
-  social: {
-    emoji: '🤝', name: '社交牛', code: 'NETW-009',
-    desc: '人脉就是钱脉！请客吃饭是投资，社交花销是成本。你总能通过关系找到机会，你的通讯录就是你的资产清单！',
-    tags: ['人脉即钱脉', '社交投资', '关系为王'],
-    bars: { 消费力: 65, 风险值: 50, 社交力: 95, 搞钱力: 75 },
-    detail: '社交牛是最具资源整合能力的搞钱人格。你的社交能力让你能链接到各种资源和机会，这是别人花钱都买不到的。但人脉不是万能的，真正的人脉建立在价值互换的基础上。2026年，建议你在拓展人脉的同时，持续提升自己的核心价值，让别人也需要你。适合你的搞钱方向：资源对接、中介撮合、社群电商、商务BD。你最易踩的坑：无效社交——花大量时间应酬，但没有转化为实际收益。'
-  },
-  analyst: {
-    emoji: '📊', name: '表哥表姐', code: 'DATA-010',
-    desc: '数据说话，不做没把握的事。你的Excel比别人的命还长，你的决策都建立在充分调研之上。理性是你最锋利的武器。',
-    tags: ['数据驱动', '理性决策', '调研狂魔'],
-    bars: { 消费力: 20, 风险值: 30, 社交力: 30, 搞钱力: 70 },
-    detail: '表哥表姐是最理性的搞钱人格。你不会被情绪左右决策，每个选择都经过数据和逻辑的验证。但完美主义有时是行动力的天敌——数据永远不够完美，市场不会等你分析完。2026年，建议你在70%把握时就出手，用小仓位试错，在实战中修正。适合你的搞钱方向：量化投资、行业研究、数据咨询、投研分析。你最易踩的坑：分析瘫痪——永远在准备，永远不行动。'
-  },
-  creative: {
-    emoji: '🎪', name: '斜杠青', code: 'SIDE-011',
-    desc: '主业只是保底，副业才是真爱！同时干三份活是你的日常，你的兴趣比你的工作多，你的收入来源也比别人多！',
-    tags: ['副业达人', '兴趣变现', '多重身份'],
-    bars: { 消费力: 45, 风险值: 55, 社交力: 65, 搞钱力: 75 },
-    detail: '斜杠青是最具多元化收入的搞钱人格。你天生不安分，喜欢同时探索多个领域，这让你有更多的收入管道和抗风险能力。但精力分散也意味着每件事都难以做到极致。2026年，建议你找到1-2个最有潜力的副业方向，深耕到能产生稳定现金流，而不是什么都做一点。适合你的搞钱方向：自媒体矩阵、技能组合变现、小红书+抖音双平台、线上陪跑。你最易踩的坑：精力稀释——什么都做，什么都没做精。'
-  },
-  hidden: {
-    emoji: '💰', name: '隐富', code: 'RICH-012',
-    desc: '闷声发大财，低调到你看不出我有钱。你不炫富不露财，但银行卡余额让很多人望尘莫及。你的财富，是你的秘密武器。',
-    tags: ['闷声发财', '低调生活', '看穿本质'],
-    bars: { 消费力: 30, 风险值: 35, 社交力: 25, 搞钱力: 95 },
-    detail: '隐富是最深藏不露的搞钱人格。你深谙"财不外露"的道理，低调行事但暗中布局。你不会被虚荣心驱使，每一笔钱都花在真正重要的地方。2026年，建议你在保持低调的同时，适当扩大信息圈，有时候一个人闷头搞不如找对合作伙伴。适合你的搞钱方向：股权投资、资产配置、长期持有、蓝海市场。你最易踩的坑：信息孤岛——过于封闭导致错过趋势和机会。'
-  },
-};
-
-// ============ 状态管理 ============
-let currentQ = 0;
-let scores = {};
-const typeKeys = Object.keys(TYPES);
-typeKeys.forEach(k => scores[k] = 0);
-
-// ============ 核心函数 ============
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
-}
-
-function startTest() {
-  currentQ = 0;
-  typeKeys.forEach(k => scores[k] = 0);
-  showPage('page-question');
-  renderQuestion();
-}
-
-function renderQuestion() {
-  const q = QUESTIONS[currentQ];
-  document.getElementById('progressFill').style.width = ((currentQ + 1) / QUESTIONS.length * 100) + '%';
-  document.getElementById('qNum').textContent = `第 ${currentQ + 1} / ${QUESTIONS.length} 题`;
-  document.getElementById('qText').textContent = q.text;
-  const optEl = document.getElementById('options');
-  optEl.innerHTML = '';
-  q.options.forEach((opt, i) => {
-    const div = document.createElement('div');
-    div.className = 'opt';
-    div.textContent = opt.text;
-    div.onclick = () => selectOption(i, div);
-    optEl.appendChild(div);
-  });
-}
-
-function selectOption(idx, el) {
-  el.classList.add('selected');
-  const opt = QUESTIONS[currentQ].options[idx];
-  Object.entries(opt.scores).forEach(([k, v]) => {
-    scores[k] = (scores[k] || 0) + v;
-  });
-  setTimeout(() => {
-    currentQ++;
-    if (currentQ < QUESTIONS.length) {
-      renderQuestion();
-    } else {
-      showCalc();
-    }
-  }, 400);
-}
-
-function showCalc() {
-  showPage('page-calc');
-  let pct = 0;
-  const iv = setInterval(() => {
-    pct += Math.floor(Math.random() * 15) + 5;
-    if (pct > 100) pct = 100;
-    document.getElementById('calcPercent').textContent = pct + '%';
-    if (pct >= 100) {
-      clearInterval(iv);
-      setTimeout(showResult, 600);
-    }
-  }, 200);
-}
-
-function showResult() {
-  // 找最高分的人格
-  let maxScore = 0, maxType = 'turtle';
-  Object.entries(scores).forEach(([k, v]) => {
-    if (v > maxScore) { maxScore = v; maxType = k; }
-  });
-  const type = TYPES[maxType];
-  
-  document.getElementById('resultEmoji').textContent = type.emoji;
-  document.getElementById('resultType').textContent = type.name;
-  document.getElementById('resultCode').textContent = type.code;
-  document.getElementById('resultDesc').textContent = type.desc;
-  
-  // Tags
-  const tagsEl = document.getElementById('resultTags');
-  tagsEl.innerHTML = type.tags.map(t => `<span class="result-tag">${t}</span>`).join('');
-  
-  // Bars
-  const barsEl = document.getElementById('resultBars');
-  barsEl.innerHTML = '';
-  const colors = { '消费力': '#ff6b6b', '风险值': '#ffd43b', '社交力': '#9775fa', '搞钱力': '#51cf66' };
-  Object.entries(type.bars).forEach(([label, val]) => {
-    barsEl.innerHTML += `
-      <div class="bar-row">
-        <span class="bar-label">${label}</span>
-        <div class="bar-track"><div class="bar-value" style="width:${val}%;background:${colors[label]}"></div></div>
-        <span class="bar-num">${val}%</span>
-      </div>`;
-  });
-  
-  // Store result for sharing
-  window._resultType = maxType;
-  
-  showPage('page-result');
-}
-
-function showPaywall() {
-  const modal = document.getElementById('modalPaywall');
-  modal.classList.add('active');
-  document.getElementById('modalWxId').textContent = CONFIG.wechatId;
-  
-  // Set QR codes
-  if (CONFIG.wechatQrUrl) {
-    document.getElementById('wechatQr').innerHTML = `<img src="${CONFIG.wechatQrUrl}" alt="微信收款码">`;
-  }
-  if (CONFIG.alipayQrUrl) {
-    document.getElementById('alipayQr').innerHTML = `<img src="${CONFIG.alipayQrUrl}" alt="支付宝收款码">`;
-  }
-}
-
-function closeModal() {
-  document.getElementById('modalPaywall').classList.remove('active');
-}
-
-function shareResult() {
-  const type = TYPES[window._resultType];
-  const text = `💰 我的搞钱人格是【${type.emoji}${type.name}】！\n快来测测你是哪种搞钱体质→\n${location.href}`;
-  if (navigator.share) {
-    navigator.share({ title: CONFIG.testTitle, text: text, url: location.href });
-  } else if (navigator.clipboard) {
-    navigator.clipboard.writeText(text).then(() => {
-      alert('✅ 已复制分享文案！\n粘贴发送给好友即可～');
-    });
-  } else {
-    prompt('复制以下文案分享：', text);
-  }
-}
-
-function retryTest() {
-  startTest();
-}
-
-// ============ 粒子背景 ============
 function initParticles() {
   const el = document.getElementById('particles');
   for (let i = 0; i < 20; i++) {
@@ -542,19 +77,7 @@ function initParticles() {
     el.appendChild(p);
   }
 }
-
-// ============ 动态访客数 ============
-function updateCount() {
-  const base = 28647;
-  const add = Math.floor(Math.random() * 200) + 50;
-  const el = document.getElementById('testCount');
-  if (el) el.textContent = `🔥 已有 ${(base + add).toLocaleString()} 人完成测试`;
-}
-
-// ============ 初始化 ============
 initParticles();
-updateCount();
-setInterval(updateCount, 30000);
 </script>
 </body>
 </html>

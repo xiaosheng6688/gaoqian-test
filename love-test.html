@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta property="og:title" content="2026恋爱人格鉴定 - 测测你是哪种恋爱体质">
+<meta property="og:description" content="12道题测出你的隐藏恋爱人格！你是恋爱脑还是冰山美人？">
+<meta property="og:image" content="https://img.icons8.com/color/200/heart-with-arrow.png">
+<title>2026恋爱人格鉴定</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#f5a623;--gold-dark:#d4881a;--gold-light:#ffe8b8;--bg:#1a1a2e;--bg2:#16213e;--text:#fff;--text2:#aab;--accent:#ff6b6b;--green:#51cf66;--purple:#9775fa}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+.page{display:none;min-height:100vh;padding:20px;flex-direction:column;align-items:center;justify-content:center}
+.page.active{display:flex}
+.landing-title{font-size:28px;font-weight:800;text-align:center;background:linear-gradient(135deg,var(--gold),#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;line-height:1.3}
+.landing-sub{font-size:15px;color:var(--text2);text-align:center;margin-bottom:30px;line-height:1.6}
+.landing-icon{font-size:80px;text-align:center;margin-bottom:20px;animation:bounce 2s infinite}
+.landing-count{font-size:13px;color:var(--gold);text-align:center;margin-bottom:20px}
+.btn-start{background:linear-gradient(135deg,var(--gold),var(--accent));color:#fff;border:none;padding:16px 60px;font-size:18px;font-weight:700;border-radius:50px;cursor:pointer;box-shadow:0 4px 20px rgba(245,166,35,0.4);transition:transform .2s,box-shadow .2s}
+.btn-start:active{transform:scale(0.95);box-shadow:0 2px 10px rgba(245,166,35,0.3)}
+.tag-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:20px 0;max-width:340px}
+.tag{padding:4px 12px;background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.3);border-radius:20px;font-size:12px;color:var(--gold)}
+.progress-bar{width:100%;max-width:400px;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;margin-bottom:30px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--accent));border-radius:3px;transition:width .4s ease}
+.q-num{font-size:13px;color:var(--gold);margin-bottom:8px;text-align:center}
+.q-text{font-size:20px;font-weight:700;text-align:center;margin-bottom:30px;line-height:1.5;max-width:360px}
+.options{width:100%;max-width:400px;display:flex;flex-direction:column;gap:12px}
+.opt{padding:16px 20px;background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.1);border-radius:14px;cursor:pointer;transition:all .25s;font-size:15px;line-height:1.5}
+.opt:active{transform:scale(0.97)}
+.opt.selected{border-color:var(--gold);background:rgba(245,166,35,0.12)}
+.calc-icon{font-size:60px;animation:spin 2s linear infinite;margin-bottom:20px}
+.calc-text{font-size:18px;color:var(--gold);text-align:center;margin-bottom:20px}
+.calc-percent{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.calc-hints{margin-top:30px;text-align:center}
+.calc-hint{font-size:14px;color:var(--text2);margin:6px 0;opacity:0;animation:fadeIn .5s forwards}
+.result-card{width:100%;max-width:380px;background:linear-gradient(145deg,rgba(245,166,35,0.15),rgba(255,107,107,0.1));border:2px solid rgba(245,166,35,0.3);border-radius:24px;padding:30px;text-align:center;position:relative;overflow:hidden}
+.result-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.05),transparent 70%);animation:glow 3s ease-in-out infinite}
+.result-emoji{font-size:72px;margin-bottom:10px;position:relative}
+.result-type{font-size:26px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;position:relative}
+.result-code{font-size:13px;color:var(--gold);opacity:0.7;margin-bottom:16px;position:relative;letter-spacing:2px}
+.result-desc{font-size:15px;color:var(--text2);line-height:1.7;position:relative;margin-bottom:16px}
+.result-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;position:relative}
+.result-tag{padding:4px 14px;background:rgba(245,166,35,0.15);border-radius:20px;font-size:12px;color:var(--gold)}
+.result-bar{margin:16px 0;position:relative}
+.bar-row{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.bar-label{width:60px;text-align:right;color:var(--text2);flex-shrink:0}
+.bar-track{flex:1;height:8px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden}
+.bar-value{height:100%;border-radius:4px;transition:width 1s ease}
+.bar-num{width:35px;font-size:12px;color:var(--text2)}
+.btn-group{display:flex;flex-direction:column;gap:12px;width:100%;max-width:380px;margin-top:24px}
+.btn-unlock{background:linear-gradient(135deg,var(--gold),#ff8c00);color:#fff;border:none;padding:16px;font-size:16px;font-weight:700;border-radius:14px;cursor:pointer;box-shadow:0 4px 20px rgba(245,166,35,0.4);position:relative;overflow:hidden}
+.btn-unlock::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,0.1),transparent);animation:shine 3s infinite}
+.btn-share{background:rgba(255,255,255,0.08);color:var(--text);border:1px solid rgba(255,255,255,0.15);padding:14px;font-size:15px;font-weight:600;border-radius:14px;cursor:pointer}
+.btn-retry{background:transparent;color:var(--text2);border:none;padding:12px;font-size:14px;cursor:pointer}
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:100;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.active{display:flex}
+.modal{background:var(--bg2);border-radius:20px;padding:24px;max-width:360px;width:100%;text-align:center;position:relative;animation:slideUp .3s ease}
+.modal-title{font-size:18px;font-weight:700;margin-bottom:8px}
+.modal-sub{font-size:14px;color:var(--text2);margin-bottom:20px;line-height:1.6}
+.modal-price{font-size:36px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
+.modal-qr{width:180px;height:180px;background:rgba(255,255,255,0.05);border:2px dashed rgba(245,166,35,0.3);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;overflow:hidden}
+.modal-qr img{width:100%;height:100%;object-fit:contain}
+.modal-qr-text{font-size:40px;color:rgba(245,166,35,0.3)}
+.modal-wechat{font-size:14px;color:var(--gold);margin:12px 0}
+.modal-steps{text-align:left;font-size:13px;color:var(--text2);line-height:2;margin:16px 0;padding:0 10px}
+.modal-steps span{color:var(--gold);font-weight:600}
+.modal-close{position:absolute;top:12px;right:16px;font-size:24px;color:var(--text2);cursor:pointer;background:none;border:none;padding:4px}
+.modal-report-preview{background:rgba(255,255,255,0.05);border-radius:12px;padding:16px;margin:16px 0;text-align:left}
+.modal-report-preview h4{color:var(--gold);font-size:14px;margin-bottom:8px}
+.modal-report-preview li{font-size:13px;color:var(--text2);margin:4px 0;list-style:none;padding-left:16px;position:relative}
+.modal-report-preview li::before{content:'✨';position:absolute;left:0}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes shine{0%{transform:translateX(-100%) rotate(45deg)}100%{transform:translateX(100%) rotate(45deg)}}
+@keyframes glow{0%,100%{opacity:0.5}50%{opacity:1}}
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.particle{position:absolute;width:4px;height:4px;background:var(--gold);border-radius:50%;opacity:0.3;animation:float 6s infinite}
+@keyframes float{0%,100%{transform:translateY(0) translateX(0);opacity:0.3}50%{transform:translateY(-100px) translateX(30px);opacity:0.6}}
+@media(min-width:500px){.result-card{padding:40px}.landing-title{font-size:34px}}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);background:#51cf66;color:#fff;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;z-index:200;transition:transform .3s ease;box-shadow:0 4px 20px rgba(81,207,102,0.3)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="particles" id="particles"></div>
+
+<div class="page active" id="page-landing">
+  <div class="landing-icon">💕</div>
+  <h1 class="landing-title">2026恋爱人格鉴定</h1>
+  <p class="landing-sub">12道题，2分钟<br>测出你的隐藏恋爱DNA<br>看看你是哪种恋爱体质！</p>
+  <div class="tag-list">
+    <span class="tag">🥰 恋爱脑</span>
+    <span class="tag">❄️ 冰山</span>
+    <span class="tag">🔥 热情</span>
+    <span class="tag">🤡 舔狗</span>
+    <span class="tag">💅 女王</span>
+    <span class="tag">🧘 佛系</span>
+  </div>
+  <div class="landing-count" id="testCount">🔥 已有 28,647 人完成测试</div>
+  <button class="btn-start" onclick="startTest()">开始测试 🧬</button>
+</div>
+
+<div class="page" id="page-question">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="q-num" id="qNum"></div>
+  <div class="q-text" id="qText"></div>
+  <div class="options" id="options"></div>
+</div>
+
+<div class="page" id="page-calc">
+  <div class="calc-icon">💘</div>
+  <div class="calc-text">正在分析你的恋爱DNA...</div>
+  <div class="calc-percent" id="calcPercent">0%</div>
+  <div class="calc-hints">
+    <div class="calc-hint" style="animation-delay:0.5s">💓 扫描心动模式...</div>
+    <div class="calc-hint" style="animation-delay:1.5s">🔮 匹配恋爱模型...</div>
+    <div class="calc-hint" style="animation-delay:2.5s">💌 生成爱情画像...</div>
+  </div>
+</div>
+
+<div class="page" id="page-result">
+  <div class="result-card">
+    <div class="result-emoji" id="resultEmoji"></div>
+    <div class="result-type" id="resultType"></div>
+    <div class="result-code" id="resultCode"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="result-tags" id="resultTags"></div>
+    <div class="result-bar" id="resultBars"></div>
+  </div>
+  <div class="btn-group">
+    <button class="btn-unlock" onclick="showPaywall()">🔐 解锁完整恋爱分析报告</button>
+    <button class="btn-share" onclick="shareResult()">📤 分享给好友测测</button>
+    <button class="btn-retry" onclick="retryTest()">🔄 再测一次</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalPaywall">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-title">🔒 解锁完整恋爱分析报告</div>
+    <div class="modal-sub">你的恋爱人格远不止表面这些<br>解锁深度报告，获取恋爱攻略</div>
+    <div class="modal-price">¥ 5.9</div>
+    <div class="modal-report-preview">
+      <h4>报告包含：</h4>
+      <ul>
+        <li>恋爱人格深度解析（1500字）</li>
+        <li>你的恋爱优势与致命盲区</li>
+        <li>2026年你的桃花方位与时机</li>
+        <li>避坑指南：你最易踩的感情坑</li>
+        <li>恋爱幸运色/数字/最佳星座配对</li>
+      </ul>
+    </div>
+    <div class="modal-qr" id="wechatQr"><div class="modal-qr-text">微信</div></div>
+    <div class="modal-wechat">微信扫码支付，备注"恋爱报告"</div>
+    <div class="modal-qr" id="alipayQr" style="margin-top:8px"><div class="modal-qr-text">支付宝</div></div>
+    <div style="font-size:13px;color:var(--text2);margin-top:8px">支付宝扫码支付</div>
+    <div class="modal-steps">
+      <span>①</span> 扫码支付 ¥5.9<br>
+      <span>②</span> 添加微信 <span style="color:var(--accent)" id="modalWxId"></span><br>
+      <span>③</span> 发送支付截图 + 你的测试结果<br>
+      <span>④</span> 获取你的专属恋爱分析报告 ✅
+    </div>
+  </div>
+</div>
+
+<script>
+const CONFIG = {
+  wechatId: 'z6ys8866',
+  wechatQrUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAisAAAIrAQAAAAAG1eSFAAAEbElEQVR4nO2d31IqMQzGk8IM3uEbrG+Cb3bwzfRN5A3gTmaUnEn6Z7srWRDRoed8vwuldsmw39ZOmqSFha7AJlzDChHM+EAbH2jjA218oI0PtPGBNtPafHBFKM1H7ReeE9EuNTlKqc3CXTZzBQLMuEAbH2jzS9osJFM6OnniNRHLnpk7eSWiJ656E+8/8Gm+Tfi+CQVmfKDNf6YN2T/7QrbW+CPEpbnSieCQLuvkWXsV7dWmehh2scjrbd1UgBkXaOMDbXx0YTFiJnteyubhhf+stWlOw4ZXQiREH0feAYmnwPDzgTYNa/MRww5GCUqs4kokhiwavKlLCBe96xMw4wNtWtFmnn4v++jETPZ3O+7sD/Zjf5d7OTsYujD5gU8TYMYF2vhAm1/SZl9yGOZRLC1G8cJr9Si0ueGHeLnGNtXf2OTr00SDJ+UDbXygTSvazM2FOBajYF1tpF5tapcIj9yP636aADMu0MYH2vxa1kMsAVrR9dnS2FslQZYidRIEWY9JMIp9oE1bE0VkJWttirzZVGAcaCbSJ0/VwYhYejQ3kR5t5oEHmHGBNtPazOTNXqeghDoJmxSUsOae783BYE4exW4csoDEE2D4+UCb9gquut6F6D0KosFao/TGlQg8ivYeeIAZF2gzQbXWKGEHnRle4wutvVRSKaYymlWw9DgBhp8PtGlFm7n9XMiOO5saREKslOjk5THVURAtt7Ey0+ooUk7kmYhZbvKmAsy4QBsfaHM6mBlXE1qynehEYmwz5kQU2yOm5J0gqYlg5iQYfj7Qpq2lR0Wf5ljpRFE3jTirRLAprL0HHmDGBdqc1iYmMp7ieRTVXo9Z2WZeciL9eRQptgmJJ8Hw84E2rXkU236tobFNStHL0ltdnHursgrUUTTzwAPMuECb82IUiZwApUHtZa7MTDNDDGjgPIozwPDzgTataENVuNIqJWrWdXrU/I3DsDITwczmHniAGRdoc17BVVUpIXWFVaSsRLK/QTpvYK/HSTD8fKBNe0sP6fOhuRST8uJiWwclqokigxhFMw88wIwLtJlgUCmRSiOqYOYhXRaXHhWphBsexUkw/HygTbMxisNwZuBx4US/9LCTeOFRNPbAA8y4QJvztpmXU7hzoabUWY+SBBlcjIniJBh+PtCm1ROuJP7ase461xjFQY/d3t2nIzQlEC2sxEp3gpAeeGXN27qpADMu0MYH2nzpm8Li/tCIfKRTMdMhmWF8HkUMaEDiCTD8fKBNw8HM92qtISUBOmyijqLVBx5gxgXafPGbwvr0qOTdHKMkSLy4P28TEvtAGx9o07Q2i7J7lGfjo3f7Eu6yEmnjpr5OuOA9R4AZH2jTsDYzeUv7Qy3roZtJY1Ai+Rt6hKaGOkX6Lw67+Zu6hHDRuz4BMz7QpvGCq2Xa9pWCEqOz73Ko08DSo6kHHmDGBdqcW0dRHZJJx06qGcQ2UcJ9Hhh+PtCmFW3405d+XcLmtm4qwIwLtPGBNj7Qxgfa+EAbn39Sm7+oQ4hnNCBE9gAAAABJRU5ErkJggg==',
+  alipayQrUrl: 'data:image/png;base64,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',
+  price: 5.9,
+  testTitle: '2026恋爱人格鉴定',
+  sharePrefix: '💕 我的恋爱人格是',
+  shareSuffix: '快来测测你是哪种恋爱体质→',
+};
+
+const QUESTIONS = [
+  { text: '看到喜欢的人，你会？', options: [
+    { text: '立刻冲上去表白！', scores: { passionate: 3, brave: 2 } },
+    { text: '偷偷观察，等机会', scores: { shy: 3, cautious: 2 } },
+    { text: '假装不在意，其实内心狂跳', scores: { tsundere: 3, cool: 2 } },
+    { text: '先打听清楚对方的情况', scores: { strategist: 3, cautious: 2 } },
+  ]},
+  { text: '约会时，你更倾向于？', options: [
+    { text: '精心策划，每个细节都安排', scores: { planner: 3, romantic: 2 } },
+    { text: '随性而为，走到哪算哪', scores: { free: 3, passionate: 2 } },
+    { text: '让对方决定，我配合就好', scores: { accommodating: 3, shy: 2 } },
+    { text: '去网红打卡地发朋友圈', scores: { showoff: 3, romantic: 2 } },
+  ]},
+  { text: '对象不回消息，你会？', options: [
+    { text: '疯狂发消息追问', scores: { anxious: 3, passionate: 2 } },
+    { text: '等TA主动找我', scores: { proud: 3, cool: 2 } },
+    { text: '猜测各种原因，脑补剧情', scores: { overthink: 3, anxious: 2 } },
+    { text: '无所谓，我也忙', scores: { independent: 3, free: 2 } },
+  ]},
+  { text: '吵架时，你通常？', options: [
+    { text: '必须吵赢，据理力争', scores: { fighter: 3, passionate: 2 } },
+    { text: '冷战，等对方先低头', scores: { proud: 3, cool: 2 } },
+    { text: '立刻道歉，不管谁错', scores: { accommodating: 3, anxious: 2 } },
+    { text: '讲道理，分析谁对谁错', scores: { rational: 3, strategist: 2 } },
+  ]},
+  { text: '你觉得最好的礼物是？', options: [
+    { text: '贵重的，代表心意', scores: { material: 3, showoff: 2 } },
+    { text: '亲手做的，独一无二', scores: { romantic: 3, planner: 2 } },
+    { text: '实用的，每天都能用到', scores: { practical: 3, rational: 2 } },
+    { text: '陪伴就是最好的礼物', scores: { accommodating: 3, romantic: 2 } },
+  ]},
+  { text: '发现对象和异性聊天，你会？', options: [
+    { text: '直接质问，要求解释', scores: { jealous: 3, fighter: 2 } },
+    { text: '暗中观察，收集证据', scores: { strategist: 3, overthink: 2 } },
+    { text: '相信TA，不问', scores: { trusting: 3, independent: 2 } },
+    { text: '也找异性聊天，以示公平', scores: { proud: 3, cool: 2 } },
+  ]},
+  { text: '恋爱中，你最看重？', options: [
+    { text: '安全感，被在乎的感觉', scores: { anxious: 3, romantic: 2 } },
+    { text: '自由空间，不被束缚', scores: { free: 3, independent: 2 } },
+    { text: '激情，心动的感觉', scores: { passionate: 3, brave: 2 } },
+    { text: '稳定，能走到结婚', scores: { cautious: 3, practical: 2 } },
+  ]},
+  { text: '分手后，你会？', options: [
+    { text: '立刻找新欢疗伤', scores: { rebound: 3, free: 2 } },
+    { text: '痛苦很久，走不出来', scores: { heartbroken: 3, anxious: 2 } },
+    { text: '分析原因，总结经验', scores: { rational: 3, strategist: 2 } },
+    { text: '无所谓，下一个更好', scores: { cool: 3, independent: 2 } },
+  ]},
+  { text: '你理想的约会频率是？', options: [
+    { text: '每天见面，黏在一起', scores: { clingy: 3, passionate: 2 } },
+    { text: '一周2-3次，有空间', scores: { balanced: 3, romantic: 2 } },
+    { text: '一个月见几次就行', scores: { independent: 3, free: 2 } },
+    { text: '看心情，不固定', scores: { free: 3, cool: 2 } },
+  ]},
+  { text: '你会为了爱情放弃什么？', options: [
+    { text: '什么都愿意放弃', scores: { devoted: 3, passionate: 2 } },
+    { text: '可以妥协一部分', scores: { accommodating: 3, balanced: 2 } },
+    { text: '事业/原则绝不放弃', scores: { independent: 3, rational: 2 } },
+    { text: '看对方值不值得', scores: { cautious: 3, strategist: 2 } },
+  ]},
+  { text: '你对网恋的看法是？', options: [
+    { text: '真爱不分距离！', scores: { romantic: 3, brave: 2 } },
+    { text: '不太靠谱，谨慎对待', scores: { cautious: 3, rational: 2 } },
+    { text: '玩玩可以，认真算了', scores: { free: 3, cool: 2 } },
+    { text: '试过，被伤过', scores: { heartbroken: 3, overthink: 2 } },
+  ]},
+  { text: '你觉得爱情最重要的是？', options: [
+    { text: '信任和忠诚', scores: { trusting: 3, cautious: 2 } },
+    { text: '激情和浪漫', scores: { passionate: 3, romantic: 2 } },
+    { text: '理解和包容', scores: { accommodating: 3, balanced: 2 } },
+    { text: '共同成长', scores: { rational: 3, independent: 2 } },
+  ]},
+];
+
+const TYPES = {
+  passionate: { emoji: '🔥', name: '热情似火', code: 'FIRE-001',
+    desc: '你的爱像一团火，热烈而直接！喜欢就追，爱就大声说出来。你的热情能点燃对方，但有时也要注意别烧到TA。',
+    tags: ['直球选手', '热情奔放', '爱要大声说'],
+    bars: { '主动度': 95, '黏人度': 70, '理性度': 30, '忠诚度': 75 }},
+  romantic: { emoji: '🌹', name: '浪漫主义者', code: 'ROSE-002',
+    desc: '你是行走的偶像剧！烛光晚餐、 surprise 礼物、手写情书——仪式感是你的恋爱必需品。但别让浪漫变成负担。',
+    tags: ['仪式感控', '浪漫满屋', '细节控'],
+    bars: { '主动度': 65, '黏人度': 60, '理性度': 40, '忠诚度': 80 }},
+  anxious: { emoji: '😰', name: '患得患失', code: 'WORRY-003',
+    desc: 'TA晚回消息你就开始脑补分手大戏。你需要很多安全感，但这往往让对方喘不过气。学会爱自己，才能好好爱别人。',
+    tags: ['缺乏安全感', '敏感多疑', '需要确认'],
+    bars: { '主动度': 50, '黏人度': 90, '理性度': 25, '忠诚度': 85 }},
+  cool: { emoji: '❄️', name: '冰山美人', code: 'ICE-004',
+    desc: '你表面高冷，内心其实也有柔软的一面。只是不擅长表达，让人误以为你不在乎。偶尔放下防备，TA会更懂你。',
+    tags: ['外冷内热', '不善表达', '需要时间'],
+    bars: { '主动度': 20, '黏人度': 30, '理性度': 75, '忠诚度': 70 }},
+  independent: { emoji: '🦅', name: '独立自由', code: 'FREE-005',
+    desc: '爱情是你的甜品，不是主食。你有自己的生活、朋友和追求，不会为了爱情失去自我。这种独立其实很迷人！',
+    tags: ['独立自主', '需要空间', '不黏人'],
+    bars: { '主动度': 45, '黏人度': 15, '理性度': 80, '忠诚度': 65 }},
+  strategist: { emoji: '🎲', name: '恋爱军师', code: 'CHESS-006',
+    desc: '你谈恋爱像在下棋，每一步都经过计算。什么时候该主动、什么时候该冷淡，你心里有数。但爱情不是博弈，真心才能换真心。',
+    tags: ['运筹帷幄', '套路满满', '情商在线'],
+    bars: { '主动度': 70, '黏人度': 40, '理性度': 90, '忠诚度': 60 }},
+  accommodating: { emoji: '🤗', name: '温柔体贴', code: 'KIND-007',
+    desc: '你是恋爱中的"小棉袄"，总是优先考虑对方的感受。你的温柔让人安心，但别忘了自己的需求也很重要。',
+    tags: ['温柔体贴', '善解人意', '付出型'],
+    bars: { '主动度': 55, '黏人度': 65, '理性度': 35, '忠诚度': 90 }},
+  free: { emoji: '🦋', name: '自由灵魂', code: 'SOUL-008',
+    desc: '你像风一样自由，不喜欢被束缚。恋爱对你来说是锦上添花，不是必需品。遇到懂你的人，你会停留；不懂的，你潇洒离开。',
+    tags: ['随性洒脱', '不受约束', '来去自由'],
+    bars: { '主动度': 60, '黏人度': 20, '理性度': 60, '忠诚度': 50 }},
+  cautious: { emoji: '🛡️', name: '谨慎慢热', code: 'SAFE-009',
+    desc: '你不会轻易打开心扉，需要很长时间观察和确认。但一旦认定，你就是最忠诚的伴侣。慢热不是缺点，是对感情的尊重。',
+    tags: ['慢热谨慎', '观察期长', '一旦认定很专一'],
+    bars: { '主动度': 30, '黏人度': 45, '理性度': 85, '忠诚度': 95 }},
+  heartbroken: { emoji: '💔', name: '情伤未愈', code: 'HURT-010',
+    desc: '过去的感情经历让你带着伤痕。你不是不想爱，是害怕再受伤。给自己时间疗愈，对的人会在你准备好时出现。',
+    tags: ['受过伤', '害怕再爱', '需要疗愈'],
+    bars: { '主动度': 25, '黏人度': 50, '理性度': 55, '忠诚度': 70 }},
+  rational: { emoji: '🧠', name: '理性恋爱', code: 'BRAIN-011',
+    desc: '你用脑子谈恋爱！分析利弊、评估匹配度、规划未来——你的恋爱有逻辑可循。但有时候，爱情就是需要一点冲动。',
+    tags: ['理性分析', '权衡利弊', '逻辑控'],
+    bars: { '主动度': 50, '黏人度': 35, '理性度': 95, '忠诚度': 75 }},
+  devoted: { emoji: '💖', name: '恋爱脑', code: 'LOVE-012',
+    desc: '恋爱就是你的全世界！为了TA你可以放弃一切，TA就是你的太阳。这种全情投入很动人，但记得保留一点自我。',
+    tags: ['全情投入', '为爱痴狂', '眼里只有TA'],
+    bars: { '主动度': 85, '黏人度': 95, '理性度': 15, '忠诚度': 90 }},
+};
+
+let currentQ = 0;
+let scores = {};
+const typeKeys = Object.keys(TYPES);
+typeKeys.forEach(k => scores[k] = 0);
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function startTest() {
+  currentQ = 0;
+  typeKeys.forEach(k => scores[k] = 0);
+  showPage('page-question');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  document.getElementById('progressFill').style.width = ((currentQ + 1) / QUESTIONS.length * 100) + '%';
+  document.getElementById('qNum').textContent = '第 ' + (currentQ + 1) + ' / ' + QUESTIONS.length + ' 题';
+  document.getElementById('qText').textContent = q.text;
+  const optEl = document.getElementById('options');
+  optEl.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'opt';
+    div.textContent = opt.text;
+    div.onclick = () => selectOption(i, div);
+    optEl.appendChild(div);
+  });
+}
+
+function selectOption(idx, el) {
+  el.classList.add('selected');
+  const opt = QUESTIONS[currentQ].options[idx];
+  Object.entries(opt.scores).forEach(([k, v]) => {
+    scores[k] = (scores[k] || 0) + v;
+  });
+  setTimeout(() => {
+    currentQ++;
+    if (currentQ < QUESTIONS.length) {
+      renderQuestion();
+    } else {
+      showCalc();
+    }
+  }, 400);
+}
+
+function showCalc() {
+  showPage('page-calc');
+  let pct = 0;
+  const iv = setInterval(() => {
+    pct += Math.floor(Math.random() * 15) + 5;
+    if (pct > 100) pct = 100;
+    document.getElementById('calcPercent').textContent = pct + '%';
+    if (pct >= 100) {
+      clearInterval(iv);
+      setTimeout(showResult, 600);
+    }
+  }, 200);
+}
+
+function showResult() {
+  let maxScore = 0, maxType = typeKeys[0];
+  Object.entries(scores).forEach(([k, v]) => {
+    if (v > maxScore) { maxScore = v; maxType = k; }
+  });
+  const type = TYPES[maxType];
+  
+  document.getElementById('resultEmoji').textContent = type.emoji;
+  document.getElementById('resultType').textContent = type.name;
+  document.getElementById('resultCode').textContent = type.code;
+  document.getElementById('resultDesc').textContent = type.desc;
+  
+  const tagsEl = document.getElementById('resultTags');
+  tagsEl.innerHTML = type.tags.map(t => '<span class="result-tag">' + t + '</span>').join('');
+  
+  const barsEl = document.getElementById('resultBars');
+  barsEl.innerHTML = '';
+  const colors = { '主动度': '#ff6b6b', '黏人度': '#ffd43b', '理性度': '#9775fa', '忠诚度': '#51cf66' };
+  Object.entries(type.bars).forEach(([label, val]) => {
+    barsEl.innerHTML += '<div class="bar-row"><span class="bar-label">' + label + '</span><div class="bar-track"><div class="bar-value" style="width:' + val + '%;background:' + (colors[label] || '#f5a623') + '"></div></div><span class="bar-num">' + val + '%</span></div>';
+  });
+  
+  window._resultType = maxType;
+  showPage('page-result');
+}
+
+function showPaywall() {
+  const modal = document.getElementById('modalPaywall');
+  modal.classList.add('active');
+  document.getElementById('modalWxId').textContent = CONFIG.wechatId;
+  if (CONFIG.wechatQrUrl) {
+    document.getElementById('wechatQr').innerHTML = '<img src="' + CONFIG.wechatQrUrl + '" alt="微信收款码">';
+  }
+  if (CONFIG.alipayQrUrl) {
+    document.getElementById('alipayQr').innerHTML = '<img src="' + CONFIG.alipayQrUrl + '" alt="支付宝收款码">';
+  }
+}
+
+function closeModal() {
+  document.getElementById('modalPaywall').classList.remove('active');
+}
+
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; t.className = 'toast'; document.body.appendChild(t); }
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function shareResult() {
+  const type = TYPES[window._resultType];
+  const text = CONFIG.sharePrefix + '【' + type.emoji + type.name + '】！\n' + CONFIG.shareSuffix + '\n' + location.href;
+  
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('✅ 已复制！粘贴发给好友即可');
+    }).catch(() => {
+      fallbackShare(text);
+    });
+  } else {
+    fallbackShare(text);
+  }
+  
+  if (navigator.share) {
+    navigator.share({ title: CONFIG.testTitle, text: text, url: location.href }).catch(()=>{});
+  }
+}
+
+function fallbackShare(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+    showToast('✅ 已复制！粘贴发给好友即可');
+  } catch(e) {
+    prompt('复制以下文案分享：', text);
+  }
+  document.body.removeChild(ta);
+}
+
+function retryTest() {
+  startTest();
+}
+
+function initParticles() {
+  const el = document.getElementById('particles');
+  if (!el) return;
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 6 + 's';
+    p.style.animationDuration = (4 + Math.random() * 4) + 's';
+    el.appendChild(p);
+  }
+}
+
+function updateCount() {
+  const base = 28647;
+  const add = Math.floor(Math.random() * 200) + 50;
+  const el = document.getElementById('testCount');
+  if (el) el.textContent = '🔥 已有 ' + (base + add).toLocaleString() + ' 人完成测试';
+}
+
+initParticles();
+updateCount();
+setInterval(updateCount, 30000);
+</script>
+</body>
+</html>

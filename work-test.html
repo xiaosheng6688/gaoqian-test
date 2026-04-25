@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta property="og:title" content="2026职场人格鉴定 - 测测你是哪种职场体质">
+<meta property="og:description" content="12道题测出你的隐藏职场人格！你是老黄牛还是野心家？">
+<meta property="og:image" content="https://img.icons8.com/color/200/briefcase.png">
+<title>2026职场人格鉴定</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#f5a623;--gold-dark:#d4881a;--gold-light:#ffe8b8;--bg:#1a1a2e;--bg2:#16213e;--text:#fff;--text2:#aab;--accent:#ff6b6b;--green:#51cf66;--purple:#9775fa}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+.page{display:none;min-height:100vh;padding:20px;flex-direction:column;align-items:center;justify-content:center}
+.page.active{display:flex}
+.landing-title{font-size:28px;font-weight:800;text-align:center;background:linear-gradient(135deg,var(--gold),#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;line-height:1.3}
+.landing-sub{font-size:15px;color:var(--text2);text-align:center;margin-bottom:30px;line-height:1.6}
+.landing-icon{font-size:80px;text-align:center;margin-bottom:20px;animation:bounce 2s infinite}
+.landing-count{font-size:13px;color:var(--gold);text-align:center;margin-bottom:20px}
+.btn-start{background:linear-gradient(135deg,var(--gold),var(--accent));color:#fff;border:none;padding:16px 60px;font-size:18px;font-weight:700;border-radius:50px;cursor:pointer;box-shadow:0 4px 20px rgba(245,166,35,0.4);transition:transform .2s,box-shadow .2s}
+.btn-start:active{transform:scale(0.95);box-shadow:0 2px 10px rgba(245,166,35,0.3)}
+.tag-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:20px 0;max-width:340px}
+.tag{padding:4px 12px;background:rgba(245,166,35,0.15);border:1px solid rgba(245,166,35,0.3);border-radius:20px;font-size:12px;color:var(--gold)}
+.progress-bar{width:100%;max-width:400px;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;margin-bottom:30px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--accent));border-radius:3px;transition:width .4s ease}
+.q-num{font-size:13px;color:var(--gold);margin-bottom:8px;text-align:center}
+.q-text{font-size:20px;font-weight:700;text-align:center;margin-bottom:30px;line-height:1.5;max-width:360px}
+.options{width:100%;max-width:400px;display:flex;flex-direction:column;gap:12px}
+.opt{padding:16px 20px;background:rgba(255,255,255,0.06);border:2px solid rgba(255,255,255,0.1);border-radius:14px;cursor:pointer;transition:all .25s;font-size:15px;line-height:1.5}
+.opt:active{transform:scale(0.97)}
+.opt.selected{border-color:var(--gold);background:rgba(245,166,35,0.12)}
+.calc-icon{font-size:60px;animation:spin 2s linear infinite;margin-bottom:20px}
+.calc-text{font-size:18px;color:var(--gold);text-align:center;margin-bottom:20px}
+.calc-percent{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.calc-hints{margin-top:30px;text-align:center}
+.calc-hint{font-size:14px;color:var(--text2);margin:6px 0;opacity:0;animation:fadeIn .5s forwards}
+.result-card{width:100%;max-width:380px;background:linear-gradient(145deg,rgba(245,166,35,0.15),rgba(255,107,107,0.1));border:2px solid rgba(245,166,35,0.3);border-radius:24px;padding:30px;text-align:center;position:relative;overflow:hidden}
+.result-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,166,35,0.05),transparent 70%);animation:glow 3s ease-in-out infinite}
+.result-emoji{font-size:72px;margin-bottom:10px;position:relative}
+.result-type{font-size:26px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;position:relative}
+.result-code{font-size:13px;color:var(--gold);opacity:0.7;margin-bottom:16px;position:relative;letter-spacing:2px}
+.result-desc{font-size:15px;color:var(--text2);line-height:1.7;position:relative;margin-bottom:16px}
+.result-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;position:relative}
+.result-tag{padding:4px 14px;background:rgba(245,166,35,0.15);border-radius:20px;font-size:12px;color:var(--gold)}
+.result-bar{margin:16px 0;position:relative}
+.bar-row{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:13px}
+.bar-label{width:60px;text-align:right;color:var(--text2);flex-shrink:0}
+.bar-track{flex:1;height:8px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden}
+.bar-value{height:100%;border-radius:4px;transition:width 1s ease}
+.bar-num{width:35px;font-size:12px;color:var(--text2)}
+.btn-group{display:flex;flex-direction:column;gap:12px;width:100%;max-width:380px;margin-top:24px}
+.btn-unlock{background:linear-gradient(135deg,var(--gold),#ff8c00);color:#fff;border:none;padding:16px;font-size:16px;font-weight:700;border-radius:14px;cursor:pointer;box-shadow:0 4px 20px rgba(245,166,35,0.4);position:relative;overflow:hidden}
+.btn-unlock::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,rgba(255,255,255,0.1),transparent);animation:shine 3s infinite}
+.btn-share{background:rgba(255,255,255,0.08);color:var(--text);border:1px solid rgba(255,255,255,0.15);padding:14px;font-size:15px;font-weight:600;border-radius:14px;cursor:pointer}
+.btn-retry{background:transparent;color:var(--text2);border:none;padding:12px;font-size:14px;cursor:pointer}
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:100;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.active{display:flex}
+.modal{background:var(--bg2);border-radius:20px;padding:24px;max-width:360px;width:100%;text-align:center;position:relative;animation:slideUp .3s ease}
+.modal-title{font-size:18px;font-weight:700;margin-bottom:8px}
+.modal-sub{font-size:14px;color:var(--text2);margin-bottom:20px;line-height:1.6}
+.modal-price{font-size:36px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
+.modal-qr{width:180px;height:180px;background:rgba(255,255,255,0.05);border:2px dashed rgba(245,166,35,0.3);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;overflow:hidden}
+.modal-qr img{width:100%;height:100%;object-fit:contain}
+.modal-qr-text{font-size:40px;color:rgba(245,166,35,0.3)}
+.modal-wechat{font-size:14px;color:var(--gold);margin:12px 0}
+.modal-steps{text-align:left;font-size:13px;color:var(--text2);line-height:2;margin:16px 0;padding:0 10px}
+.modal-steps span{color:var(--gold);font-weight:600}
+.modal-close{position:absolute;top:12px;right:16px;font-size:24px;color:var(--text2);cursor:pointer;background:none;border:none;padding:4px}
+.modal-report-preview{background:rgba(255,255,255,0.05);border-radius:12px;padding:16px;margin:16px 0;text-align:left}
+.modal-report-preview h4{color:var(--gold);font-size:14px;margin-bottom:8px}
+.modal-report-preview li{font-size:13px;color:var(--text2);margin:4px 0;list-style:none;padding-left:16px;position:relative}
+.modal-report-preview li::before{content:'✨';position:absolute;left:0}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+@keyframes fadeIn{to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes shine{0%{transform:translateX(-100%) rotate(45deg)}100%{transform:translateX(100%) rotate(45deg)}}
+@keyframes glow{0%,100%{opacity:0.5}50%{opacity:1}}
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.particle{position:absolute;width:4px;height:4px;background:var(--gold);border-radius:50%;opacity:0.3;animation:float 6s infinite}
+@keyframes float{0%,100%{transform:translateY(0) translateX(0);opacity:0.3}50%{transform:translateY(-100px) translateX(30px);opacity:0.6}}
+@media(min-width:500px){.result-card{padding:40px}.landing-title{font-size:34px}}
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);background:#51cf66;color:#fff;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;z-index:200;transition:transform .3s ease;box-shadow:0 4px 20px rgba(81,207,102,0.3)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+<div class="particles" id="particles"></div>
+
+<div class="page active" id="page-landing">
+  <div class="landing-icon">💼</div>
+  <h1 class="landing-title">2026职场人格鉴定</h1>
+  <p class="landing-sub">12道题，2分钟<br>测出你的隐藏职场DNA<br>看看你是哪种职场体质！</p>
+  <div class="tag-list">
+    <span class="tag">👔 老黄牛</span>
+    <span class="tag">🚀 野心家</span>
+    <span class="tag">🎭 变色龙</span>
+    <span class="tag">💡 点子王</span>
+    <span class="tag">📈 卷王</span>
+    <span class="tag">🧘 佛系人</span>
+  </div>
+  <div class="landing-count" id="testCount">🔥 已有 28,647 人完成测试</div>
+  <button class="btn-start" onclick="startTest()">开始测试 🧬</button>
+</div>
+
+<div class="page" id="page-question">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="q-num" id="qNum"></div>
+  <div class="q-text" id="qText"></div>
+  <div class="options" id="options"></div>
+</div>
+
+<div class="page" id="page-calc">
+  <div class="calc-icon">📊</div>
+  <div class="calc-text">正在分析你的职场DNA...</div>
+  <div class="calc-percent" id="calcPercent">0%</div>
+  <div class="calc-hints">
+    <div class="calc-hint" style="animation-delay:0.5s">🔍 扫描工作习惯...</div>
+    <div class="calc-hint" style="animation-delay:1.5s">📈 匹配职场模型...</div>
+    <div class="calc-hint" style="animation-delay:2.5s">🎯 生成职业画像...</div>
+  </div>
+</div>
+
+<div class="page" id="page-result">
+  <div class="result-card">
+    <div class="result-emoji" id="resultEmoji"></div>
+    <div class="result-type" id="resultType"></div>
+    <div class="result-code" id="resultCode"></div>
+    <div class="result-desc" id="resultDesc"></div>
+    <div class="result-tags" id="resultTags"></div>
+    <div class="result-bar" id="resultBars"></div>
+  </div>
+  <div class="btn-group">
+    <button class="btn-unlock" onclick="showPaywall()">🔐 解锁完整职场分析报告</button>
+    <button class="btn-share" onclick="shareResult()">📤 分享给好友测测</button>
+    <button class="btn-retry" onclick="retryTest()">🔄 再测一次</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalPaywall">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-title">🔒 解锁完整职场分析报告</div>
+    <div class="modal-sub">你的职场人格远不止表面这些<br>解锁深度报告，获取职业发展攻略</div>
+    <div class="modal-price">¥ 5.9</div>
+    <div class="modal-report-preview">
+      <h4>报告包含：</h4>
+      <ul>
+        <li>职场人格深度解析（1500字）</li>
+        <li>你的职场优势与致命盲区</li>
+        <li>2026年最适合你的职业方向</li>
+        <li>避坑指南：你最易踩的职场坑</li>
+        <li>职场幸运色/数字/贵人星座</li>
+      </ul>
+    </div>
+    <div class="modal-qr" id="wechatQr"><div class="modal-qr-text">微信</div></div>
+    <div class="modal-wechat">微信扫码支付，备注"职场报告"</div>
+    <div class="modal-qr" id="alipayQr" style="margin-top:8px"><div class="modal-qr-text">支付宝</div></div>
+    <div style="font-size:13px;color:var(--text2);margin-top:8px">支付宝扫码支付</div>
+    <div class="modal-steps">
+      <span>①</span> 扫码支付 ¥5.9<br>
+      <span>②</span> 添加微信 <span style="color:var(--accent)" id="modalWxId"></span><br>
+      <span>③</span> 发送支付截图 + 你的测试结果<br>
+      <span>④</span> 获取你的专属职场分析报告 ✅
+    </div>
+  </div>
+</div>
+
+<script>
+const CONFIG = {
+  wechatId: 'z6ys8866',
+  wechatQrUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAisAAAIrAQAAAAAG1eSFAAAEbElEQVR4nO2d31IqMQzGk8IM3uEbrG+Cb3bwzfRN5A3gTmaUnEn6Z7srWRDRoed8vwuldsmw39ZOmqSFha7AJlzDChHM+EAbH2jjA218oI0PtPGBNtPafHBFKM1H7ReeE9EuNTlKqc3CXTZzBQLMuEAbH2jzS9osJFM6OnniNRHLnpk7eSWiJ656E+8/8Gm+Tfi+CQVmfKDNf6YN2T/7QrbW+CPEpbnSieCQLuvkWXsV7dWmehh2scjrbd1UgBkXaOMDbXx0YTFiJnteyubhhf+stWlOw4ZXQiREH0feAYmnwPDzgTYNa/MRww5GCUqs4kokhiwavKlLCBe96xMw4wNtWtFmnn4v++jETPZ3O+7sD/Zjf5d7OTsYujD5gU8TYMYF2vhAm1/SZl9yGOZRLC1G8cJr9Si0ueGHeLnGNtXf2OTr00SDJ+UDbXygTSvazM2FOBajYF1tpF5tapcIj9yP636aADMu0MYH2vxa1kMsAVrR9dnS2FslQZYidRIEWY9JMIp9oE1bE0VkJWttirzZVGAcaCbSJ0/VwYhYejQ3kR5t5oEHmHGBNtPazOTNXqeghDoJmxSUsOae783BYE4exW4csoDEE2D4+UCb9gquut6F6D0KosFao/TGlQg8ivYeeIAZF2gzQbXWKGEHnRle4wutvVRSKaYymlWw9DgBhp8PtGlFm7n9XMiOO5saREKslOjk5THVURAtt7Ey0+ooUk7kmYhZbvKmAsy4QBsfaHM6mBlXE1qynehEYmwz5kQU2yOm5J0gqYlg5iQYfj7Qpq2lR0Wf5ljpRFE3jTirRLAprL0HHmDGBdqc1iYmMp7ieRTVXo9Z2WZeciL9eRQptgmJJ8Hw84E2rXkU236tobFNStHL0ltdnHursgrUUTTzwAPMuECb82IUiZwApUHtZa7MTDNDDGjgPIozwPDzgTataENVuNIqJWrWdXrU/I3DsDITwczmHniAGRdoc17BVVUpIXWFVaSsRLK/QTpvYK/HSTD8fKBNe0sP6fOhuRST8uJiWwclqokigxhFMw88wIwLtJlgUCmRSiOqYOYhXRaXHhWphBsexUkw/HygTbMxisNwZuBx4US/9LCTeOFRNPbAA8y4QJvztpmXU7hzoabUWY+SBBlcjIniJBh+PtCm1ROuJP7ase461xjFQY/d3t2nIzQlEC2sxEp3gpAeeGXN27qpADMu0MYH2nzpm8Li/tCIfKRTMdMhmWF8HkUMaEDiCTD8fKBNw8HM92qtISUBOmyijqLVBx5gxgXafPGbwvr0qOTdHKMkSLy4P28TEvtAGx9o07Q2i7J7lGfjo3f7Eu6yEmnjpr5OuOA9R4AZH2jTsDYzeUv7Qy3roZtJY1Ai+Rt6hKaGOkX6Lw67+Zu6hHDRuz4BMz7QpvGCq2Xa9pWCEqOz73Ko08DSo6kHHmDGBdqcW0dRHZJJx06qGcQ2UcJ9Hhh+PtCmFW3405d+XcLmtm4qwIwLtPGBNj7Qxgfa+EAbn39Sm7+oQ4hnNCBE9gAAAABJRU5ErkJggg==',
+  alipayQrUrl: 'data:image/png;base64,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',
+  price: 5.9,
+  testTitle: '2026职场人格鉴定',
+  sharePrefix: '💼 我的职场人格是',
+  shareSuffix: '快来测测你是哪种职场体质→',
+};
+
+const QUESTIONS = [
+  { text: '周一早上醒来，你的第一反应是？', options: [
+    { text: '又要上班了，好烦', scores: { burnout: 3, slacker: 2 } },
+    { text: '新的一周，冲！', scores: { gogetter: 3, leader: 2 } },
+    { text: '先刷会手机再说', scores: { slacker: 3, burnout: 2 } },
+    { text: '规划一下这周的重点任务', scores: { planner: 3, gogetter: 2 } },
+  ]},
+  { text: '老板突然加了一个紧急任务，你会？', options: [
+    { text: '立刻放下手头的事先做', scores: { yesman: 3, gogetter: 2 } },
+    { text: '先评估优先级，再安排', scores: { planner: 3, strategist: 2 } },
+    { text: '表面上答应，实际拖到最后', scores: { slacker: 3, burnout: 2 } },
+    { text: '直接说手上还有更重要的', scores: { leader: 3, strategist: 2 } },
+  ]},
+  { text: '团队开会时，你通常？', options: [
+    { text: '积极发言，主导讨论', scores: { leader: 3, gogetter: 2 } },
+    { text: '认真听，偶尔补充', scores: { teamplayer: 3, planner: 2 } },
+    { text: '默默玩手机，等散会', scores: { slacker: 3, burnout: 2 } },
+    { text: '脑子里想的是别的事', scores: { dreamer: 3, creative: 2 } },
+  ]},
+  { text: '同事找你帮忙做他的工作，你会？', options: [
+    { text: '帮！同事之间要互相支持', scores: { teamplayer: 3, yesman: 2 } },
+    { text: '看情况，不忙就帮', scores: { diplomat: 3, teamplayer: 2 } },
+    { text: '委婉拒绝，自己也很忙', scores: { strategist: 3, leader: 2 } },
+    { text: '让他找老板协调', scores: { leader: 3, strategist: 2 } },
+  ]},
+  { text: '你理想中的工作状态是？', options: [
+    { text: '朝九晚五，准时下班', scores: { slacker: 3, burnout: 2 } },
+    { text: '有挑战，能不断成长', scores: { gogetter: 3, leader: 2 } },
+    { text: '自由安排，不受约束', scores: { creative: 3, dreamer: 2 } },
+    { text: '稳定，不要有太大变化', scores: { burnout: 3, teamplayer: 2 } },
+  ]},
+  { text: '遇到不会的工作任务，你会？', options: [
+    { text: '自己查资料研究', scores: { gogetter: 3, planner: 2 } },
+    { text: '直接问有经验的同事', scores: { teamplayer: 3, yesman: 2 } },
+    { text: '先拖着，看能不能混过去', scores: { slacker: 3, burnout: 2 } },
+    { text: '想办法推给别人做', scores: { strategist: 3, diplomat: 2 } },
+  ]},
+  { text: '年底绩效评估，你期望？', options: [
+    { text: '拿最高奖金，升职加薪', scores: { gogetter: 3, leader: 2 } },
+    { text: '达到平均水平就行', scores: { teamplayer: 3, burnout: 2 } },
+    { text: '只要不垫底就好', scores: { slacker: 3, burnout: 2 } },
+    { text: '奖金不重要，学到东西就行', scores: { creative: 3, dreamer: 2 } },
+  ]},
+  { text: '公司要裁员，你觉得最可能裁谁？', options: [
+    { text: '业绩最差的', scores: { gogetter: 3, strategist: 2 } },
+    { text: '和领导关系不好的', scores: { diplomat: 3, strategist: 2 } },
+    { text: '最老实的那个', scores: { yesman: 3, teamplayer: 2 } },
+    { text: '运气不好的', scores: { slacker: 3, burnout: 2 } },
+  ]},
+  { text: '下班后，你通常？', options: [
+    { text: '继续加班，卷死同事', scores: { gogetter: 3, leader: 2 } },
+    { text: '学习充电，提升自己', scores: { planner: 3, gogetter: 2 } },
+    { text: '立刻回家躺平', scores: { burnout: 3, slacker: 2 } },
+    { text: '社交应酬，拓展人脉', scores: { diplomat: 3, leader: 2 } },
+  ]},
+  { text: '对于拍马屁的同事，你？', options: [
+    { text: '鄙视，但表面客气', scores: { strategist: 3, leader: 2 } },
+    { text: '理解，职场生存之道', scores: { diplomat: 3, teamplayer: 2 } },
+    { text: '不屑，做好自己的事', scores: { gogetter: 3, planner: 2 } },
+    { text: '学他！谁不想升职加薪', scores: { yesman: 3, diplomat: 2 } },
+  ]},
+  { text: '如果创业，你最可能？', options: [
+    { text: '技术创业，做产品', scores: { creative: 3, planner: 2 } },
+    { text: '资源整合，做平台', scores: { leader: 3, diplomat: 2 } },
+    { text: '不会创业，太冒险', scores: { burnout: 3, teamplayer: 2 } },
+    { text: '先副业试水，再全职', scores: { gogetter: 3, strategist: 2 } },
+  ]},
+  { text: '你觉得自己最大的职场优势是？', options: [
+    { text: '执行力强，说到做到', scores: { gogetter: 3, leader: 2 } },
+    { text: '人脉广，关系好', scores: { diplomat: 3, teamplayer: 2 } },
+    { text: '创意多，想法新颖', scores: { creative: 3, dreamer: 2 } },
+    { text: '靠谱，从不掉链子', scores: { teamplayer: 3, planner: 2 } },
+  ]},
+];
+
+const TYPES = {
+  gogetter: { emoji: '🚀', name: '野心家', code: 'GO-001',
+    desc: '你天生就是来征服职场的！目标明确、执行力爆表，升职加薪是你的唯一KPI。你是团队里的发动机，但有时候也要注意别让同事觉得你太aggressive。',
+    tags: ['目标明确', '执行力强', '升职加薪'],
+    bars: { '执行力': 95, '领导力': 70, '创意力': 50, '人际力': 45 }},
+  teamplayer: { emoji: '🤝', name: '老黄牛', code: 'TEAM-002',
+    desc: '你是团队最可靠的基石。任劳任怨、从不抱怨，大家都爱和你合作。但别只顾着埋头苦干，偶尔也要让领导看到你的价值！',
+    tags: ['靠谱担当', '任劳任怨', '团队粘合剂'],
+    bars: { '执行力': 75, '领导力': 30, '创意力': 40, '人际力': 80 }},
+  leader: { emoji: '👑', name: '领袖型', code: 'BOSS-003',
+    desc: '你天生自带领导光环！不管是正式任命还是非正式场合，团队总会自然围绕你。你有魄力、有担当，但权力也是双刃剑。',
+    tags: ['天生领袖', '魄力担当', '团队核心'],
+    bars: { '执行力': 80, '领导力': 95, '创意力': 55, '人际力': 75 }},
+  slacker: { emoji: '🦥', name: '摸鱼王', code: 'FISH-004',
+    desc: '你的职场哲学是"能混则混"。不是没能力，是觉得不值得。你深谙职场生存之道——活要干，但不能干太多。适度摸鱼，有益身心健康！',
+    tags: ['摸鱼大师', '职场老油条', '生存智慧'],
+    bars: { '执行力': 20, '领导力': 25, '创意力': 60, '人际力': 50 }},
+  planner: { emoji: '📋', name: '规划师', code: 'PLAN-005',
+    desc: '没有计划的一天是不完整的！你的日程表精确到分钟，你的待办清单永远井井有条。效率是你的代名词，但偶尔也要允许意外发生。',
+    tags: ['计划狂魔', '效率达人', '井井有条'],
+    bars: { '执行力': 85, '领导力': 50, '创意力': 45, '人际力': 40 }},
+  creative: { emoji: '💡', name: '点子王', code: 'IDEA-006',
+    desc: '你的大脑是创意永动机！总有新奇的想法冒出来，让团队眼前一亮。但点子太多也会让人应接不暇，学会聚焦才能发挥最大价值。',
+    tags: ['创意无限', '脑洞大开', '灵感喷泉'],
+    bars: { '执行力': 50, '领导力': 45, '创意力': 95, '人际力': 55 }},
+  burnout: { emoji: '😩', name: '倦怠者', code: 'TIRED-007',
+    desc: '你正在经历或曾经经历过职场倦怠。不是不优秀，是累了。你需要重新审视工作的意义，找回当初的热情，或者考虑换个环境。',
+    tags: ['身心俱疲', '需要充电', '重新出发'],
+    bars: { '执行力': 30, '领导力': 20, '创意力': 35, '人际力': 40 }},
+  yesman: { emoji: '🙇', name: '老好人', code: 'YES-008',
+    desc: '你很难对别人说"不"。同事找你帮忙从不拒绝，领导的任务全盘接受。善良是你的优点，但学会拒绝才能保护自己。',
+    tags: ['不懂拒绝', '讨好型', '委屈自己'],
+    bars: { '执行力': 60, '领导力': 15, '创意力': 30, '人际力': 70 }},
+  strategist: { emoji: '🎲', name: '谋略家', code: 'CHESS-009',
+    desc: '你走一步看三步！职场对你来说就是一盘棋，每一步都经过精心计算。你有谋略、有城府，但别让算计成为你的全部。',
+    tags: ['深谋远虑', '城府深', '职场棋手'],
+    bars: { '执行力': 70, '领导力': 75, '创意力': 65, '人际力': 60 }},
+  diplomat: { emoji: '🎭', name: '变色龙', code: 'ADAPT-010',
+    desc: '你是最会"见人说人话、见鬼说鬼话"的职场高手。左右逢源、上下通吃，在任何环境都能如鱼得水。但别忘了，真诚才是最大的套路。',
+    tags: ['左右逢源', '情商爆表', '适应力强'],
+    bars: { '执行力': 55, '领导力': 60, '创意力': 50, '人际力': 95 }},
+  dreamer: { emoji: '🌈', name: '理想家', code: 'DREAM-011',
+    desc: '你工作不只是为了钱，是为了实现理想。当现实和理想冲突时，你会很痛苦。找到理想和现实的平衡点，是你最大的课题。',
+    tags: ['理想主义', '追求意义', '不甘平庸'],
+    bars: { '执行力': 45, '领导力': 40, '创意力': 75, '人际力': 50 }},
+  diplomat2: { emoji: '🎯', name: '卷王', code: 'GRIND-012',
+    desc: '不卷到第一不罢休！工作也一样，你制定了目标就一定达成。你的执行力和自律令人叹服，但别把自己逼太紧了。',
+    tags: ['目标导向', '自律达人', '不卷不行'],
+    bars: { '执行力': 90, '领导力': 65, '创意力': 40, '人际力': 45 }},
+};
+
+let currentQ = 0;
+let scores = {};
+const typeKeys = Object.keys(TYPES);
+typeKeys.forEach(k => scores[k] = 0);
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function startTest() {
+  currentQ = 0;
+  typeKeys.forEach(k => scores[k] = 0);
+  showPage('page-question');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  document.getElementById('progressFill').style.width = ((currentQ + 1) / QUESTIONS.length * 100) + '%';
+  document.getElementById('qNum').textContent = '第 ' + (currentQ + 1) + ' / ' + QUESTIONS.length + ' 题';
+  document.getElementById('qText').textContent = q.text;
+  const optEl = document.getElementById('options');
+  optEl.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'opt';
+    div.textContent = opt.text;
+    div.onclick = () => selectOption(i, div);
+    optEl.appendChild(div);
+  });
+}
+
+function selectOption(idx, el) {
+  el.classList.add('selected');
+  const opt = QUESTIONS[currentQ].options[idx];
+  Object.entries(opt.scores).forEach(([k, v]) => {
+    scores[k] = (scores[k] || 0) + v;
+  });
+  setTimeout(() => {
+    currentQ++;
+    if (currentQ < QUESTIONS.length) {
+      renderQuestion();
+    } else {
+      showCalc();
+    }
+  }, 400);
+}
+
+function showCalc() {
+  showPage('page-calc');
+  let pct = 0;
+  const iv = setInterval(() => {
+    pct += Math.floor(Math.random() * 15) + 5;
+    if (pct > 100) pct = 100;
+    document.getElementById('calcPercent').textContent = pct + '%';
+    if (pct >= 100) {
+      clearInterval(iv);
+      setTimeout(showResult, 600);
+    }
+  }, 200);
+}
+
+function showResult() {
+  let maxScore = 0, maxType = typeKeys[0];
+  Object.entries(scores).forEach(([k, v]) => {
+    if (v > maxScore) { maxScore = v; maxType = k; }
+  });
+  const type = TYPES[maxType];
+  
+  document.getElementById('resultEmoji').textContent = type.emoji;
+  document.getElementById('resultType').textContent = type.name;
+  document.getElementById('resultCode').textContent = type.code;
+  document.getElementById('resultDesc').textContent = type.desc;
+  
+  const tagsEl = document.getElementById('resultTags');
+  tagsEl.innerHTML = type.tags.map(t => '<span class="result-tag">' + t + '</span>').join('');
+  
+  const barsEl = document.getElementById('resultBars');
+  barsEl.innerHTML = '';
+  const colors = { '执行力': '#ff6b6b', '领导力': '#ffd43b', '创意力': '#9775fa', '人际力': '#51cf66' };
+  Object.entries(type.bars).forEach(([label, val]) => {
+    barsEl.innerHTML += '<div class="bar-row"><span class="bar-label">' + label + '</span><div class="bar-track"><div class="bar-value" style="width:' + val + '%;background:' + (colors[label] || '#f5a623') + '"></div></div><span class="bar-num">' + val + '%</span></div>';
+  });
+  
+  window._resultType = maxType;
+  showPage('page-result');
+}
+
+function showPaywall() {
+  const modal = document.getElementById('modalPaywall');
+  modal.classList.add('active');
+  document.getElementById('modalWxId').textContent = CONFIG.wechatId;
+  if (CONFIG.wechatQrUrl) {
+    document.getElementById('wechatQr').innerHTML = '<img src="' + CONFIG.wechatQrUrl + '" alt="微信收款码">';
+  }
+  if (CONFIG.alipayQrUrl) {
+    document.getElementById('alipayQr').innerHTML = '<img src="' + CONFIG.alipayQrUrl + '" alt="支付宝收款码">';
+  }
+}
+
+function closeModal() {
+  document.getElementById('modalPaywall').classList.remove('active');
+}
+
+function showToast(msg) {
+  let t = document.getElementById('toast');
+  if (!t) { t = document.createElement('div'); t.id = 'toast'; t.className = 'toast'; document.body.appendChild(t); }
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function shareResult() {
+  const type = TYPES[window._resultType];
+  const text = CONFIG.sharePrefix + '【' + type.emoji + type.name + '】！\n' + CONFIG.shareSuffix + '\n' + location.href;
+  
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('✅ 已复制！粘贴发给好友即可');
+    }).catch(() => {
+      fallbackShare(text);
+    });
+  } else {
+    fallbackShare(text);
+  }
+  
+  if (navigator.share) {
+    navigator.share({ title: CONFIG.testTitle, text: text, url: location.href }).catch(()=>{});
+  }
+}
+
+function fallbackShare(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+    showToast('✅ 已复制！粘贴发给好友即可');
+  } catch(e) {
+    prompt('复制以下文案分享：', text);
+  }
+  document.body.removeChild(ta);
+}
+
+function retryTest() {
+  startTest();
+}
+
+function initParticles() {
+  const el = document.getElementById('particles');
+  if (!el) return;
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 6 + 's';
+    p.style.animationDuration = (4 + Math.random() * 4) + 's';
+    el.appendChild(p);
+  }
+}
+
+function updateCount() {
+  const base = 28647;
+  const add = Math.floor(Math.random() * 200) + 50;
+  const el = document.getElementById('testCount');
+  if (el) el.textContent = '🔥 已有 ' + (base + add).toLocaleString() + ' 人完成测试';
+}
+
+initParticles();
+updateCount();
+setInterval(updateCount, 30000);
+</script>
+</body>
+</html>
