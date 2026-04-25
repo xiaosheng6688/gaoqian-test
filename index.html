@@ -175,13 +175,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 </div>
 
 <script>
+
+// ========== 防爆款：备用CDN ==========
+const BACKUP_CDN = [
+  'https://cdn.jsdelivr.net/gh/xiaosheng6688/gaoqian-test@master',
+  'https://fastly.jsdelivr.net/gh/xiaosheng6688/gaoqian-test@master',
+  'https://gcore.jsdelivr.net/gh/xiaosheng6688/gaoqian-test@master'
+];
+
+function getWorkingCdn() {
+  // 简单返回第一个，实际可以添加检测逻辑
+  return BACKUP_CDN[0];
+}
+
 // ========== 配置 ==========
 const CONFIG = {
   wechatId: 'z6ys8866',
   wechatQrUrl: 'https://cdn.jsdelivr.net/gh/xiaosheng6688/gaoqian-test@master/wx_pay.jpg',
-  alipayQrUrl: 'https://cdn.jsdelivr.net/gh/xiaosheng6688/gaoqian-test@master/ali_pay.png',
+  alipayQrUrl: 'https://cdn.jsdelivr.net/gh/xiaosheng6688/gaoqian-test@master/ali_pay.jpg',
   price: 5.9,
-  vipKey: 'SBTI2026VIP'
+  vipKey: 'SBTI2026VIP',
+  devMode: true,  // 开发者模式：永久VIP，无需付费
+  devKey: 'DEV2026BOSS'  // 开发者密钥，输入后直接解锁所有测试
 };
 
 // ========== 测试数据 ==========
@@ -585,6 +600,13 @@ function showPaywall() {
     showToast('🎉 你已解锁VIP，直接查看报告！');
     return;
   }
+  // 开发者模式：自动解锁
+  if (CONFIG.devMode) {
+    localStorage.setItem('sbti_vip_' + window._resultTest + '_' + window._resultType, '1');
+    showFullReport();
+    showToast('👑 开发者模式：永久VIP已激活！');
+    return;
+  }
   const modal = document.getElementById('modalPaywall');
   modal.classList.add('active');
   if (CONFIG.wechatQrUrl && CONFIG.wechatQrUrl !== '') {
@@ -607,12 +629,16 @@ function closeModal() {
 
 function verifyVipKey() {
   const input = document.getElementById('vipKeyInput').value.trim();
-  if (input === CONFIG.vipKey) {
+  if (input === CONFIG.vipKey || input === CONFIG.devKey) {
     // 密钥正确，解锁VIP
     localStorage.setItem('sbti_vip_' + window._resultTest + '_' + window._resultType, '1');
     closeModal();
     showFullReport();
-    showToast('🎉 VIP解锁成功！');
+    if (input === CONFIG.devKey) {
+      showToast('👑 开发者密钥：永久VIP已激活！');
+    } else {
+      showToast('🎉 VIP解锁成功！');
+    }
   } else {
     document.getElementById('vipError').style.display = 'block';
   }
