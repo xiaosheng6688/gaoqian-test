@@ -581,13 +581,8 @@ function showPaywall() {
     showToast('🎉 你已解锁VIP，直接查看报告！');
     return;
   }
-  // 开发者模式：自动解锁
-  if (CONFIG.devMode) {
-    localStorage.setItem('sbti_vip_' + window._resultTest + '_' + window._resultType, '1');
-    showFullReport();
-    showToast('👑 开发者模式：永久VIP已激活！');
-    return;
-  }
+  // 开发者模式：需要输入密钥（隐藏功能，不对外显示）
+  // 注意：devMode已关闭，所有用户都需要付费或输入正确密钥
   const modal = document.getElementById('modalPaywall');
   modal.classList.add('active');
   if (CONFIG.wechatQrUrl && CONFIG.wechatQrUrl !== '') {
